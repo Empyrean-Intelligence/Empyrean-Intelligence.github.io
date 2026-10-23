@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rsi-audit v0.1 — Empyrean Intelligence Tools</title>
+  <meta name="description" content="rsi-audit v0.1: checks a self-improvement or agent-leaderboard claim from its public artefacts.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-wordmark">
+        Empyrean
+        <span class="location-tag">Bangalore</span>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../index.html#tools" class="nav-link active">Tools</a></li>
+          <li><a href="../method.html" class="nav-link">Method</a></li>
+          <li><a href="../index.html#releases" class="nav-link">Releases</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+          <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="prose" style="padding-top: var(--space-6);">
+        <span class="eyebrow">Tools // Release 2 // MIT License</span>
+        <h1><code>rsi-audit</code> v0.1</h1>
+        <p style="font-size: 1.0625rem; color: var(--muted); margin-top: var(--space-2);">
+          Python package. No dependencies.
+        </p>
+        <p>
+          Checks a self-improvement or agent-leaderboard claim from its public artefacts.
+        </p>
+      </div>
+
+      <!-- Quick Install -->
+      <div style="max-width: 68ch; margin-top: var(--space-3); margin-bottom: var(--space-5);">
+        <span class="eyebrow">Quick Install</span>
+        <div class="terminal-block">
+          <div class="terminal-content">
+            <span class="prompt-symbol">$</span>
+            <span>pip install rsi-audit</span>
+          </div>
+          <button type="button" class="copy-btn" data-clipboard-text="pip install rsi-audit">COPY</button>
+        </div>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- The Five Checks with Example Outputs -->
+      <section class="prose">
+        <span class="eyebrow">Audit Capabilities</span>
+        <h2>The five checks</h2>
+        <p>
+          <code>rsi-audit</code> evaluates verification rigor across five distinct axes:
+        </p>
+
+        <!-- Check 1: Selection -->
+        <div style="margin-top: var(--space-4);">
+          <h3 style="font-family: var(--font-mono); font-size: 1rem;">1. selection</h3>
+          <p style="font-size: 0.875rem; color: var(--muted);">
+            Was the reported system picked on the graded tasks?
+          </p>
+          <pre class="tool-output"><code>$ rsi-audit selection devlog_example.csv --graded graded_test --submitted harness_v2
+Graded set: graded_test -- 4 development evaluation(s), 4 distinct candidate(s) scored on it.
+  harness_v2                     0.7100   &lt;- submitted
+  harness_v2_finetuned           0.6900
+  harness_v1                     0.6200
+  baseline                       0.3100
+VERDICT: SELECTION ON TEST</code></pre>
+        </div>
+
+        <!-- Check 2: Luck -->
+        <div style="margin-top: var(--space-4);">
+          <h3 style="font-family: var(--font-mono); font-size: 1rem;">2. luck</h3>
+          <p style="font-size: 0.875rem; color: var(--muted);">
+            How many record claims could pass by chance?
+          </p>
+          <pre class="tool-output"><code>$ rsi-audit luck --total 400 --top-max 50 --rate 0.001
+Expected luck-only passes: 0.400 across the study; 0.050 in the most-claimed headline run.
+VERDICT: INCONCLUSIVE</code></pre>
+        </div>
+
+        <!-- Check 3: Ranking -->
+        <div style="margin-top: var(--space-4);">
+          <h3 style="font-family: var(--font-mono); font-size: 1rem;">3. ranking</h3>
+          <p style="font-size: 0.875rem; color: var(--muted);">
+            Does the order survive resampling tasks?
+          </p>
+          <pre class="tool-output"><code>$ rsi-audit ranking devlog_example.csv
+Resampling tasks to test ranking stability:
+Order does not survive bootstrap task resampling.
+VERDICT: UNSTABLE RANKING</code></pre>
+        </div>
+
+        <!-- Check 4: Visibility -->
+        <div style="margin-top: var(--space-4);">
+          <h3 style="font-family: var(--font-mono); font-size: 1rem;">4. visibility</h3>
+          <p style="font-size: 0.875rem; color: var(--muted);">
+            Can the agent read the grader's tests or answers?
+          </p>
+          <pre class="tool-output"><code>$ rsi-audit visibility artifact_manifest.json
+Checking isolation between agent runtime and evaluation grader:
+Agent execution environment has read visibility into grader test files.
+VERDICT: VISIBILITY LEAK DETECTED</code></pre>
+        </div>
+
+        <!-- Check 5: Card -->
+        <div style="margin-top: var(--space-4);">
+          <h3 style="font-family: var(--font-mono); font-size: 1rem;">5. card</h3>
+          <p style="font-size: 0.875rem; color: var(--muted);">
+            12 requirements a self-improvement number needs.
+          </p>
+          <pre class="tool-output"><code>$ rsi-audit card claims_card.json
+Auditing against the 12 card requirements:
+Status: 2 requirements failed, 1 requirement unknown.
+VERDICT: CARD INCOMPLETE</code></pre>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <!-- The 12 Card Requirements Checklist Graphic -->
+      <section>
+        <div class="prose">
+          <span class="eyebrow">Standardization</span>
+          <h2>The 12 card requirements</h2>
+          <p>
+            A self-improvement number requires all twelve conditions to establish verified progress:
+          </p>
+        </div>
+
+        <div class="checklist-grid" style="max-width: 68ch; margin-top: var(--space-3);">
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>matched control</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>matched compute</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>repeated training runs</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>intervals</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>held-out final evaluation</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>attempts reported</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-no">NO</span>
+            <span>correctness gate covers what is scored</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-no">NO</span>
+            <span>cheats scored as failures</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-unknown">UNKNOWN</span>
+            <span>hidden grader</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>resampled ranking</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>pre-committed task set</span>
+          </div>
+          <div class="checklist-item">
+            <span class="status-badge status-yes">YES</span>
+            <span>disclosed harness</span>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <!-- Limits & Audits Placeholder -->
+      <section class="prose">
+        <span class="eyebrow">Boundary Conditions</span>
+        <h2>Limits</h2>
+        <div class="limits-callout">
+          <div class="limits-title">Audit Protocol Limits</div>
+          <p style="margin: 0; font-size: 0.8125rem; color: var(--ink);">
+            <code>rsi-audit</code> evaluates published artefacts, devlogs, and evaluation harnesses. It identifies unverified reporting paths, selection on test, and missing gates; it audits artefacts, not unreleased weights.
+          </p>
+        </div>
+
+        <div style="margin-top: var(--space-4);">
+          <span class="eyebrow">Audits</span>
+          <h3>Audit write-ups</h3>
+          <p>
+            Each audit goes privately to the authors first; the write-up is published here once they have had
+            the chance to reply.
+          </p>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <div class="prose">
+        <p><a href="../index.html">&larr; Back to overview</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="mono">Empyrean Intelligence</span> &mdash; AI Lab, Bangalore
+      </div>
+      <div>
+        <a href="gameability.html">&larr; gameability v0.2</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

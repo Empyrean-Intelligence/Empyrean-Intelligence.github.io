@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Method &amp; Standards — Empyrean Intelligence</title>
+  <meta name="description" content="Empyrean Intelligence's research method: pre-registration, two independent routes, measurement vs inference labelled, authors notified first.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-wordmark">
+        Empyrean
+        <span class="location-tag">Bangalore</span>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="index.html#tools" class="nav-link">Tools</a></li>
+          <li><a href="method.html" class="nav-link active">Method</a></li>
+          <li><a href="index.html#releases" class="nav-link">Releases</a></li>
+          <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+          <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="prose" style="padding-top: var(--space-6);">
+        <span class="eyebrow">Methodology &amp; Standards</span>
+        <h1>Research method</h1>
+        <p style="font-size: 1.0625rem; color: var(--muted); margin-top: var(--space-2);">
+          A system can only improve as fast as it can tell a real improvement from a fooled check. Our verification standards enforce that every reported finding reflects genuine measurement.
+        </p>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- Principles detailed -->
+      <section class="prose">
+        <div style="margin-bottom: var(--space-5);">
+          <span class="eyebrow">Protocol 1</span>
+          <h2>Pre-registration before running</h2>
+          <p>
+            Evaluation protocols, test sets, perturbation operators, and target metrics are committed prior to running experiments. Committing the evaluation harness before viewing results prevents post-hoc selection, metric shopping, and stopping rules based on favorable noise.
+          </p>
+        </div>
+
+        <div style="margin-bottom: var(--space-5);">
+          <span class="eyebrow">Protocol 2</span>
+          <h2>Two independent routes for every reported number</h2>
+          <p>
+            No headline figure is published from a single script or execution run. Every result must be arrived at via two independent implementation routes&mdash;independent code paths, separate data loaders, or alternative verification harnesses&mdash;and verified to agree before publication.
+          </p>
+        </div>
+
+        <div style="margin-bottom: var(--space-5);">
+          <span class="eyebrow">Protocol 3</span>
+          <h2>Measurement vs inference labelled</h2>
+          <p>
+            We strictly separate what was directly observed from what is inferred:
+          </p>
+          <ul style="padding-left: 20px; line-height: 1.6; font-size: 0.9375rem;">
+            <li><strong>Measurement:</strong> Direct, reproducible empirical output (e.g. 169 of 942 reference solution perturbations passed visible tests).</li>
+            <li><strong>Inference:</strong> Interpretations, extrapolations, or theoretical limits. All inferences are explicitly labelled as such and never conflated with raw experimental data.</li>
+          </ul>
+        </div>
+
+        <div style="margin-bottom: var(--space-5);">
+          <span class="eyebrow">Protocol 4</span>
+          <h2>Authors notified first</h2>
+          <p>
+            Claims about others' work go to the authors privately first. Before releasing an audit of any public artefact or benchmark, findings are sent directly to the original creators to allow review, clarification, or resolution of misunderstandings.
+          </p>
+        </div>
+
+        <div style="margin-bottom: var(--space-5);">
+          <span class="eyebrow">Protocol 5</span>
+          <h2>Negative results are published too</h2>
+          <p>
+            Verification tools that find no gameability or interventions that fail to produce a measurable difference are published on the same cadence as positive findings. Suppressing negative results distorts the verification baseline.
+          </p>
+        </div>
+
+        <div>
+          <span class="eyebrow">Protocol 6</span>
+          <h2>Intervals and limits with every number</h2>
+          <p>
+            Point estimates without intervals are unscientific. Every measurement is accompanied by its empirical interval (such as 95% intervals) and an explicit statement of its limits (what the tool measures, what it cannot measure, and where the floor lies).
+          </p>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <div class="prose">
+        <p><a href="index.html">&larr; Back to overview</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="mono">Empyrean Intelligence</span> &mdash; AI Lab, Bangalore
+      </div>
+      <div>
+        <a href="index.html#tools">View shipped tools &rarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

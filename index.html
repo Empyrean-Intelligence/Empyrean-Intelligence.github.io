@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empyrean Intelligence — AI Lab, Bangalore</title>
+  <meta name="description" content="Empyrean Intelligence is a small AI lab in Bangalore. Building superintelligence through verification tools.">
+  <!-- Google Fonts: Newsreader (serif), Inter Tight (sans), JetBrains Mono (monospace) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-wordmark">
+        Empyrean
+        <span class="location-tag">Bangalore</span>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#tools" class="nav-link">Tools</a></li>
+          <li><a href="method.html" class="nav-link">Method</a></li>
+          <li><a href="#releases" class="nav-link">Releases</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="prose">
+          <span class="eyebrow">Empyrean Intelligence // Bangalore</span>
+          <h1 class="hero-mission">Mission: build superintelligence.</h1>
+          <p class="hero-position">
+            Our position: self-improving AI is limited by verification. A system can only improve as fast as it can tell a real improvement from a fooled check, and today's checks are fooled more often than anyone measures.
+          </p>
+          <p class="prose" style="color: var(--muted); font-size: 0.9375rem;">
+            What we ship: free, open tools that measure whether AI results are real, released on a fast cadence.
+          </p>
+        </div>
+
+        <div class="hero-commands" style="max-width: 68ch;">
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span class="command-text" data-typewriter="pip install &quot;gameability[hf]&quot; &amp;&amp; gameability check mbpp">pip install "gameability[hf]" &amp;&amp; gameability check mbpp</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="pip install &quot;gameability[hf]&quot; &amp;&amp; gameability check mbpp">COPY</button>
+          </div>
+
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span class="command-text">pip install rsi-audit</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="pip install rsi-audit">COPY</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- Release 1: gameability v0.2 -->
+    <section id="tools" class="container">
+      <div class="prose">
+        <span class="eyebrow">Release 1 // MIT License // Python</span>
+        <h2><code>gameability</code> v0.2</h2>
+        <p>
+          Runs on a laptop, no model or API key. Finds problems in a code benchmark that accept broken solutions. It breaks each problem's reference solution in one small place, confirms the result is really wrong, then checks whether the problem's own tests notice.
+        </p>
+        <p style="margin-top: var(--space-1);">
+          <a href="tools/gameability.html">View full scoreboard &amp; documentation &rarr;</a>
+        </p>
+      </div>
+
+      <!-- Install line -->
+      <div style="max-width: 68ch; margin-top: var(--space-2); margin-bottom: var(--space-4);">
+        <div class="terminal-block">
+          <div class="terminal-content">
+            <span class="prompt-symbol">$</span>
+            <span>pip install "gameability[hf]" &amp;&amp; gameability check mbpp</span>
+          </div>
+          <button type="button" class="copy-btn" data-clipboard-text="pip install &quot;gameability[hf]&quot; &amp;&amp; gameability check mbpp">COPY</button>
+        </div>
+      </div>
+
+      <!-- Scoreboard Measurement Cards -->
+      <div class="prose">
+        <h3 style="font-size: 1.0625rem; font-family: var(--font-sans); font-weight: 600; margin-bottom: var(--space-1);">
+          Scoreboard: problems that accept at least one broken solution (95% intervals)
+        </h3>
+      </div>
+
+      <div class="cards-grid cards-grid-3">
+        <!-- MBPP -->
+        <article class="measurement-card">
+          <div>
+            <div class="card-target-name">MBPP</div>
+            <div class="card-value">17.9%</div>
+            <div class="card-fraction">169 of 942</div>
+            <div class="interval-widget">
+              <div class="interval-scale-labels">
+                <span>[15.6, 20.5]</span>
+              </div>
+              <div class="interval-track">
+                <div class="interval-span" style="left: 62.4%; width: 19.6%;"></div>
+                <div class="interval-point" style="left: 71.6%;"></div>
+              </div>
+            </div>
+            <div class="card-interval-text">95% interval: [15.6, 20.5]</div>
+          </div>
+          <div class="card-limits">
+            Attacker is a single small edit (floor, not ceiling). Audits tests, not models.
+          </div>
+        </article>
+
+        <!-- MBPP sanitized -->
+        <article class="measurement-card">
+          <div>
+            <div class="card-target-name">MBPP sanitized</div>
+            <div class="card-value">13.8%</div>
+            <div class="card-fraction">57 of 413</div>
+            <div class="interval-widget">
+              <div class="interval-scale-labels">
+                <span>[10.8, 17.5]</span>
+              </div>
+              <div class="interval-track">
+                <div class="interval-span" style="left: 43.2%; width: 26.8%;"></div>
+                <div class="interval-point" style="left: 55.2%;"></div>
+              </div>
+            </div>
+            <div class="card-interval-text">95% interval: [10.8, 17.5]</div>
+          </div>
+          <div class="card-limits">
+            Attacker is a single small edit (floor, not ceiling). Audits tests, not models.
+          </div>
+        </article>
+
+        <!-- HumanEval -->
+        <article class="measurement-card">
+          <div>
+            <div class="card-target-name">HumanEval</div>
+            <div class="card-value">10.3%</div>
+            <div class="card-fraction">16 of 155</div>
+            <div class="interval-widget">
+              <div class="interval-scale-labels">
+                <span>[6.5, 16.1]</span>
+              </div>
+              <div class="interval-track">
+                <div class="interval-span" style="left: 26.0%; width: 38.4%;"></div>
+                <div class="interval-point" style="left: 41.2%;"></div>
+              </div>
+            </div>
+            <div class="card-interval-text">95% interval: [6.5, 16.1]</div>
+          </div>
+          <div class="card-limits">
+            Attacker is a single small edit (floor, not ceiling). Audits tests, not models.
+          </div>
+        </article>
+
+        <!-- KodCode RL training set -->
+        <article class="measurement-card">
+          <div>
+            <div class="card-target-name">KodCode RL training set (1,000-row sample)</div>
+            <div class="card-value">9.7%</div>
+            <div class="card-fraction">45 of 466</div>
+            <div class="interval-widget">
+              <div class="interval-scale-labels">
+                <span>[7.3, 12.7]</span>
+              </div>
+              <div class="interval-track">
+                <div class="interval-span" style="left: 29.2%; width: 21.6%;"></div>
+                <div class="interval-point" style="left: 38.8%;"></div>
+              </div>
+            </div>
+            <div class="card-interval-text">95% interval: [7.3, 12.7]</div>
+          </div>
+          <div class="card-limits">
+            Random sample of 1,000 rows. Audits tests, not models.
+          </div>
+        </article>
+
+        <!-- HumanEval+ -->
+        <article class="measurement-card">
+          <div>
+            <div class="card-target-name">HumanEval+</div>
+            <div class="card-value">3.4%</div>
+            <div class="card-fraction">5 of 147</div>
+            <div class="interval-widget">
+              <div class="interval-scale-labels">
+                <span>[1.5, 7.7]</span>
+              </div>
+              <div class="interval-track">
+                <div class="interval-span" style="left: 6.0%; width: 24.8%;"></div>
+                <div class="interval-point" style="left: 13.6%;"></div>
+              </div>
+            </div>
+            <div class="card-interval-text">95% interval: [1.5, 7.7]</div>
+          </div>
+          <div class="card-limits">
+            Attacker is a single small edit (floor, not ceiling). Audits tests, not models.
+          </div>
+        </article>
+
+        <!-- MBPP+ -->
+        <article class="measurement-card">
+          <div>
+            <div class="card-target-name">MBPP+</div>
+            <div class="card-value">2.0%</div>
+            <div class="card-fraction">7 of 353</div>
+            <div class="interval-widget">
+              <div class="interval-scale-labels">
+                <span>[1.0, 4.0]</span>
+              </div>
+              <div class="interval-track">
+                <div class="interval-span" style="left: 4.0%; width: 12.0%;"></div>
+                <div class="interval-point" style="left: 8.0%;"></div>
+              </div>
+            </div>
+            <div class="card-interval-text">95% interval: [1.0, 4.0]</div>
+          </div>
+          <div class="card-limits">
+            Attacker is a single small edit (floor, not ceiling). Audits tests, not models.
+          </div>
+        </article>
+      </div>
+
+      <!-- Confirmation note -->
+      <div class="prose" style="margin-top: var(--space-4);">
+        <p style="font-size: 0.875rem; color: var(--ink);">
+          <strong>Confirmation:</strong> re-run against EvalPlus's independent tests, <strong>95.2%</strong> of flagged MBPP problems and <strong>84.6%</strong> of flagged HumanEval problems are confirmed.
+        </p>
+      </div>
+
+      <!-- Limits callout -->
+      <div class="limits-callout" style="max-width: 68ch; margin-top: var(--space-2);">
+        <div class="limits-title">Limits to show next to the numbers</div>
+        <p style="margin: 0; font-size: 0.8125rem; color: var(--ink);">
+          The attacker is a single small edit (a floor, not a ceiling); it audits tests, not models; it does not predict where a specific model will cheat.
+        </p>
+      </div>
+
+      <!-- Example Output Block (Diff) -->
+      <div class="prose" style="margin-top: var(--space-4);">
+        <span class="eyebrow">Example Output</span>
+        <pre class="tool-output"><code>  415 -- 6 of 11 broken solutions pass every visible test
+<span class="diff-del">-    if arr_len &lt; 2:</span>
+<span class="diff-add">+    if arr_len &lt;= 2:</span>
+      a test that catches it: assert max_Product([4, 9]) == (4, 9)</code></pre>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- Release 2: rsi-audit v0.1 -->
+    <section class="container">
+      <div class="prose">
+        <span class="eyebrow">Release 2 // MIT License // Python // No Dependencies</span>
+        <h2><code>rsi-audit</code> v0.1</h2>
+        <p>
+          Checks a self-improvement or agent-leaderboard claim from its public artefacts.
+        </p>
+        <p style="margin-top: var(--space-1);">
+          <a href="tools/rsi-audit.html">View the five checks &amp; documentation &rarr;</a>
+        </p>
+      </div>
+
+      <!-- Install line -->
+      <div style="max-width: 68ch; margin-top: var(--space-2); margin-bottom: var(--space-3);">
+        <div class="terminal-block">
+          <div class="terminal-content">
+            <span class="prompt-symbol">$</span>
+            <span>pip install rsi-audit</span>
+          </div>
+          <button type="button" class="copy-btn" data-clipboard-text="pip install rsi-audit">COPY</button>
+        </div>
+      </div>
+
+      <!-- Five checks -->
+      <div class="prose">
+        <h3 style="font-size: 1.0625rem; font-family: var(--font-sans); font-weight: 600; margin-bottom: var(--space-1);">
+          Five checks
+        </h3>
+        <ul style="padding-left: 20px; margin-bottom: var(--space-3); font-size: 0.9375rem; line-height: 1.6;">
+          <li><code>ranking</code>: does the order survive resampling tasks</li>
+          <li><code>visibility</code>: can the agent read the grader's tests or answers</li>
+          <li><code>selection</code>: was the reported system picked on the graded tasks</li>
+          <li><code>luck</code>: how many record claims could pass by chance</li>
+          <li><code>card</code>: 12 requirements a self-improvement number needs</li>
+        </ul>
+      </div>
+
+      <!-- The 12 card requirements as checklist graphic -->
+      <div class="prose">
+        <h3 style="font-size: 1.0625rem; font-family: var(--font-sans); font-weight: 600; margin-bottom: var(--space-1);">
+          The 12 card requirements
+        </h3>
+      </div>
+
+      <div class="checklist-grid" style="max-width: 68ch;">
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>matched control</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>matched compute</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>repeated training runs</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>intervals</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>held-out final evaluation</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>attempts reported</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>correctness gate covers what is scored</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>cheats scored as failures</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>hidden grader</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>resampled ranking</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>pre-committed task set</span>
+        </div>
+        <div class="checklist-item">
+          <span class="status-badge status-yes">REQUIRED</span>
+          <span>disclosed harness</span>
+        </div>
+      </div>
+
+      <!-- Audits Section Placeholder -->
+      <div class="prose" style="margin-top: var(--space-4);">
+        <h3 style="font-size: 1.0625rem; font-family: var(--font-sans); font-weight: 600; margin-bottom: var(--space-1);">
+          Audits
+        </h3>
+        <p>
+          We audit published self-improvement claims and leaderboards. Each audit goes privately to the
+          authors first; the write-up appears here once they have had the chance to reply.
+        </p>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- Five Problems on the Path -->
+    <section class="container">
+      <div class="prose">
+        <span class="eyebrow">Roadmap</span>
+        <h2>Five problems on the path</h2>
+        <p>
+          We are honest about which have shipped work; the others are listed as research, with no claims.
+        </p>
+
+        <div class="problems-list">
+          <div class="problem-row">
+            <span class="problem-name">verification</span>
+            <span class="problem-status-shipped">Shipped work (gameability v0.2)</span>
+          </div>
+          <div class="problem-row">
+            <span class="problem-name">recursive self-improvement</span>
+            <span class="problem-status-shipped">Shipped work (rsi-audit v0.1)</span>
+          </div>
+          <div class="problem-row">
+            <span class="problem-name">experiential learning</span>
+            <span class="problem-status-research">Research</span>
+          </div>
+          <div class="problem-row">
+            <span class="problem-name">continual learning</span>
+            <span class="problem-status-research">Research</span>
+          </div>
+          <div class="problem-row">
+            <span class="problem-name">sample efficiency</span>
+            <span class="problem-status-research">Research</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- Principles Block -->
+    <section class="container">
+      <div class="prose">
+        <span class="eyebrow">Principles</span>
+        <h2>How we work</h2>
+        <p style="font-size: 1rem; line-height: 1.6; margin-bottom: var(--space-2);">
+          Every number ships with its interval and its limits.<br>
+          Claims about others' work go to the authors privately first.<br>
+          Negative results are published too.
+        </p>
+        <p style="font-size: 0.875rem;">
+          <a href="method.html">Read our method and standards in detail &rarr;</a>
+        </p>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- Release Cadence Block -->
+    <section id="releases" class="container">
+      <div class="prose">
+        <span class="eyebrow">Release Cadence</span>
+        <h2>A useful, measured release every few days.</h2>
+
+        <div class="cadence-timeline">
+          <div class="timeline-slot shipped">
+            <span><strong>gameability v0.2</strong> &mdash; benchmark gameability checker</span>
+            <span style="color: var(--signal); font-size: 0.6875rem; text-transform: uppercase;">Shipped</span>
+          </div>
+          <div class="timeline-slot shipped">
+            <span><strong>rsi-audit v0.1</strong> &mdash; self-improvement claim auditor</span>
+            <span style="color: var(--signal); font-size: 0.6875rem; text-transform: uppercase;">Shipped</span>
+          </div>
+          <div class="timeline-slot upcoming">
+            <span><strong>Open RL environment audit</strong> &mdash; what share of open RL environments pay reward for no work</span>
+            <span style="font-size: 0.6875rem; text-transform: uppercase;">In progress</span>
+          </div>
+          <div class="timeline-slot upcoming">
+            <span><strong>Frontier verification</strong> &mdash; tasks checked exactly, at depths where the strongest models fail</span>
+            <span style="font-size: 0.6875rem; text-transform: uppercase;">In progress</span>
+          </div>
+          <div class="timeline-slot upcoming">
+            <span><strong>Self-improving loop</strong> &mdash; training on verified signal, with matched controls and published compute</span>
+            <span style="font-size: 0.6875rem; text-transform: uppercase;">In progress</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- Contact & Repositories -->
+    <section id="contact" class="container">
+      <div class="prose">
+        <span class="eyebrow">Contact &amp; Source</span>
+        <h2>Contact</h2>
+        <p style="font-size: 0.9375rem; margin-bottom: var(--space-2);">
+          Source: <a href="https://github.com/Empyrean-Intelligence/gameability">gameability</a> &middot;
+          <a href="https://github.com/Empyrean-Intelligence/rsi-audit">rsi-audit</a>
+        </p>
+        <p style="font-size: 0.9375rem; margin-bottom: var(--space-2);">
+          Packages: <a href="https://pypi.org/project/gameability/">PyPI: gameability</a> &middot;
+          <a href="https://pypi.org/project/rsi-audit/">PyPI: rsi-audit</a>
+        </p>
+        <p style="font-size: 0.9375rem;">
+          Reach us: <a href="https://github.com/Empyrean-Intelligence">github.com/Empyrean-Intelligence</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="mono">Empyrean Intelligence</span> &mdash; AI Lab, Bangalore
+      </div>
+      <div>
+        Free, open verification tools for AI.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

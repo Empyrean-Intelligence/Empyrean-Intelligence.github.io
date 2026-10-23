@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gameability v0.2 — Empyrean Intelligence Tools</title>
+  <meta name="description" content="gameability v0.2: finds problems in a code benchmark that accept broken solutions.">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-wordmark">
+        Empyrean
+        <span class="location-tag">Bangalore</span>
+      </a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../index.html#tools" class="nav-link active">Tools</a></li>
+          <li><a href="../method.html" class="nav-link">Method</a></li>
+          <li><a href="../index.html#releases" class="nav-link">Releases</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+          <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <div class="container">
+      <div class="prose" style="padding-top: var(--space-6);">
+        <span class="eyebrow">Tools // Release 1 // MIT License</span>
+        <h1><code>gameability</code> v0.2</h1>
+        <p style="font-size: 1.0625rem; color: var(--muted); margin-top: var(--space-2);">
+          Python package. Runs on a laptop, no model or API key.
+        </p>
+        <p>
+          Finds problems in a code benchmark that accept broken solutions. It breaks each problem's reference solution in one small place, confirms the result is really wrong, then checks whether the problem's own tests notice.
+        </p>
+      </div>
+
+      <!-- Install & Run -->
+      <div style="max-width: 68ch; margin-top: var(--space-3); margin-bottom: var(--space-5);">
+        <span class="eyebrow">Quick Install</span>
+        <div class="terminal-block">
+          <div class="terminal-content">
+            <span class="prompt-symbol">$</span>
+            <span>pip install "gameability[hf]" &amp;&amp; gameability check mbpp</span>
+          </div>
+          <button type="button" class="copy-btn" data-clipboard-text="pip install &quot;gameability[hf]&quot; &amp;&amp; gameability check mbpp">COPY</button>
+        </div>
+      </div>
+
+      <hr class="section-rule">
+
+      <!-- How It Works (5 Numbered Steps) -->
+      <section class="prose">
+        <span class="eyebrow">Methodology</span>
+        <h2>How it works</h2>
+        <p>
+          The tool evaluates benchmark test sensitivity through five sequential steps:
+        </p>
+
+        <ol class="steps-list">
+          <li class="step-item">
+            <strong>Load problem &amp; reference solution:</strong> Retrieve the task prompt, canonical reference implementation, and official test suite.
+          </li>
+          <li class="step-item">
+            <strong>Apply single small edit:</strong> Break the reference solution in one small place (e.g. operator mutation, off-by-one boundary, branch perturbation).
+          </li>
+          <li class="step-item">
+            <strong>Confirm wrongness:</strong> Confirm that the perturbed result is genuinely incorrect against semantic specification before proceeding.
+          </li>
+          <li class="step-item">
+            <strong>Execute problem's own tests:</strong> Run the problem's official test harness against the broken code.
+          </li>
+          <li class="step-item">
+            <strong>Check for detection:</strong> Record whether the test suite notices. If the broken solution passes every visible test, flag the problem as gameable.
+          </li>
+        </ol>
+      </section>
+
+      <hr class="section-rule">
+
+      <!-- Full Scoreboard Table -->
+      <section>
+        <div class="prose">
+          <span class="eyebrow">Measurement Data</span>
+          <h2>Full Scoreboard</h2>
+          <p>
+            Problems that accept at least one broken solution, reported with 95% confidence intervals:
+          </p>
+        </div>
+
+        <div class="table-container">
+          <table class="scoreboard-table">
+            <thead>
+              <tr>
+                <th>Benchmark</th>
+                <th>Flagged Rate</th>
+                <th>Fraction</th>
+                <th>95% Interval</th>
+                <th>95% Interval Visual</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>MBPP</strong></td>
+                <td class="num flagged-pct">17.9%</td>
+                <td class="num">169 of 942</td>
+                <td class="num">[15.6, 20.5]</td>
+                <td style="min-width: 140px;">
+                  <div class="interval-track">
+                    <div class="interval-span" style="left: 62.4%; width: 19.6%;"></div>
+                    <div class="interval-point" style="left: 71.6%;"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>MBPP sanitized</strong></td>
+                <td class="num flagged-pct">13.8%</td>
+                <td class="num">57 of 413</td>
+                <td class="num">[10.8, 17.5]</td>
+                <td>
+                  <div class="interval-track">
+                    <div class="interval-span" style="left: 43.2%; width: 26.8%;"></div>
+                    <div class="interval-point" style="left: 55.2%;"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>HumanEval</strong></td>
+                <td class="num flagged-pct">10.3%</td>
+                <td class="num">16 of 155</td>
+                <td class="num">[6.5, 16.1]</td>
+                <td>
+                  <div class="interval-track">
+                    <div class="interval-span" style="left: 26.0%; width: 38.4%;"></div>
+                    <div class="interval-point" style="left: 41.2%;"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>KodCode RL training set</strong> (1,000-row random sample)</td>
+                <td class="num flagged-pct">9.7%</td>
+                <td class="num">45 of 466</td>
+                <td class="num">[7.3, 12.7]</td>
+                <td>
+                  <div class="interval-track">
+                    <div class="interval-span" style="left: 29.2%; width: 21.6%;"></div>
+                    <div class="interval-point" style="left: 38.8%;"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>HumanEval+</strong></td>
+                <td class="num flagged-pct">3.4%</td>
+                <td class="num">5 of 147</td>
+                <td class="num">[1.5, 7.7]</td>
+                <td>
+                  <div class="interval-track">
+                    <div class="interval-span" style="left: 6.0%; width: 24.8%;"></div>
+                    <div class="interval-point" style="left: 13.6%;"></div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>MBPP+</strong></td>
+                <td class="num flagged-pct">2.0%</td>
+                <td class="num">7 of 353</td>
+                <td class="num">[1.0, 4.0]</td>
+                <td>
+                  <div class="interval-track">
+                    <div class="interval-span" style="left: 4.0%; width: 12.0%;"></div>
+                    <div class="interval-point" style="left: 8.0%;"></div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="prose" style="margin-top: var(--space-3);">
+          <p style="font-size: 0.9375rem;">
+            <strong>Confirmation:</strong> re-run against EvalPlus's independent tests, <strong>95.2%</strong> of flagged MBPP problems and <strong>84.6%</strong> of flagged HumanEval problems are confirmed.
+          </p>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <!-- Limits -->
+      <section class="prose">
+        <span class="eyebrow">Boundary Conditions</span>
+        <h2>Limits</h2>
+        <div class="limits-callout">
+          <div class="limits-title">Explicit Measurement Boundaries</div>
+          <ul style="margin: 0; padding-left: 18px; font-size: 0.875rem; line-height: 1.6;">
+            <li>The attacker is a single small edit (a floor, not a ceiling).</li>
+            <li>It audits tests, not models.</li>
+            <li>It does not predict where a specific model will cheat.</li>
+          </ul>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <!-- Example Output Block -->
+      <section class="prose">
+        <span class="eyebrow">Output Inspection</span>
+        <h2>Example output</h2>
+        <p>
+          Real tool output rendered as diffs:
+        </p>
+
+        <pre class="tool-output"><code>  415 -- 6 of 11 broken solutions pass every visible test
+<span class="diff-del">-    if arr_len &lt; 2:</span>
+<span class="diff-add">+    if arr_len &lt;= 2:</span>
+      a test that catches it: assert max_Product([4, 9]) == (4, 9)</code></pre>
+      </section>
+
+      <hr class="section-rule">
+
+      <!-- Reproduce Commands -->
+      <section class="prose">
+        <span class="eyebrow">Reproduction</span>
+        <h2>Reproduce commands</h2>
+        <p>
+          Commands to reproduce the scoreboard numbers locally:
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: var(--space-2); margin-top: var(--space-2);">
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span>gameability check mbpp</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="gameability check mbpp">COPY</button>
+          </div>
+
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span>gameability check mbpp-sanitized</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="gameability check mbpp-sanitized">COPY</button>
+          </div>
+
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span>gameability check humaneval</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="gameability check humaneval">COPY</button>
+          </div>
+
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span>gameability check kodcode --sample 1000</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="gameability check kodcode --sample 1000">COPY</button>
+          </div>
+
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span>gameability check humanevalplus</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="gameability check humanevalplus">COPY</button>
+          </div>
+
+          <div class="terminal-block">
+            <div class="terminal-content">
+              <span class="prompt-symbol">$</span>
+              <span>gameability check mbppplus</span>
+            </div>
+            <button type="button" class="copy-btn" data-clipboard-text="gameability check mbppplus">COPY</button>
+          </div>
+        </div>
+      </section>
+
+      <hr class="section-rule">
+
+      <div class="prose">
+        <p><a href="../index.html">&larr; Back to overview</a></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <span class="mono">Empyrean Intelligence</span> &mdash; AI Lab, Bangalore
+      </div>
+      <div>
+        <a href="rsi-audit.html">rsi-audit v0.1 &rarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
