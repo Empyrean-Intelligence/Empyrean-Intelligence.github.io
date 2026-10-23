@@ -1,6 +1,6 @@
 # Empyrean Intelligence — Public Website
 
-Public website for **Empyrean Intelligence**, an AI lab in Bangalore building superintelligence through open verification tools.
+Public website for **Empyrean Intelligence**, Free, open verification tools for Super Intelligence.
 
 ---
 
