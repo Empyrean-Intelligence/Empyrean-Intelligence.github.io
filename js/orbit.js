@@ -17,17 +17,16 @@
   var FRONTIER = 0.83;    // dashed ring: the limit of human checking
 
   var bodies = [
-    { key: 'verify', name: 'Verification', status: 'The engine: checks that cannot be fooled',
+    { key: 'verify', name: 'Verification', role: 'the engine', status: 'The engine: checks that cannot be fooled',
       rgb: RGB.teal, orbit: 0.34, size: 7, speed: 0.15, phase: 0.6, spawn: 6 },
-    { key: 'continual', name: 'Continual learning', status: 'Keeps what it learns, forgets nothing: research',
+    { key: 'continual', name: 'Continual learning', role: 'keeps what it learns', status: 'Keeps what it learns, forgets nothing: research',
       rgb: RGB.gold, orbit: 0.63, size: 9, speed: 0.08, phase: 2.6, spawn: 8 },
-    { key: 'experience', name: 'Experience past the frontier', status: 'Self-taught, exactly checked: built, first run pending',
+    { key: 'experience', name: 'Experience past the frontier', role: 'teaches itself', status: 'Self-taught, exactly checked: built, first run pending',
       rgb: RGB.violet, orbit: 1.0, size: 11, speed: 0.045, phase: 4.5, spawn: 12 }
   ];
   bodies.forEach(function (b) { b.flash = 0; b.acc = 0; b.x = 0; b.y = 0; b.z = 0; b.s = b.size; b.la = 0; });
 
-  var W = 0, H = 0, cx = 0, cy = 0, R = 0, dpr = 1, lastDt = 0, textRight = 0;
-  var copy = hero.querySelector('.hero-copy');
+  var W = 0, H = 0, cx = 0, cy = 0, R = 0, dpr = 1, lastDt = 0;
   var stars = [], particles = [], pulses = [];
   var t = 0, last = 0, pulseClock = 1.5, running = false, visible = true;
   var mx = -1, my = -1, px = 0.5, py = 0.5, hovered = null;
@@ -38,16 +37,13 @@
     dpr = Math.min(2, window.devicePixelRatio || 1);
     canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var wide = W >= 900;
     narrow = W < 560;
-    TILT = narrow ? 0.5 : 0.4;
-    // wide screens: a large system that runs off the right edge; the copy sits on the dimmed left
-    cx = wide ? W * 0.68 : W * 0.5;
-    // narrow screens: the system sits in the band the stylesheet reserves above the copy (padding-top 330px)
-    cy = wide ? H * 0.5 : 170;
-    R = wide ? Math.min(W * 0.42, H * 0.95 / TILT / 2) : Math.min(W * 0.46, 250);
-    textRight = 0;
-    if (wide && copy) textRight = copy.getBoundingClientRect().right - rect.left + 24;
+    TILT = narrow ? 0.62 : 0.4;
+    // the system alone fills the hero, centred; the outer orbit's height stays inside ~80% of the hero
+    cx = W * 0.5;
+    cy = H * 0.48;
+    // on phones the outer orbit runs past the screen edges; labels that would clip fade out
+    R = Math.min(W * (narrow ? 0.56 : 0.42), H * 0.4 / TILT);
     var n = Math.min(420, Math.round(W * H / 3200));
     stars = [];
     for (var i = 0; i < n; i++) {
@@ -200,11 +196,25 @@
     ctx.fillText(text, x, y);
   }
 
-  function labelBox(text, x, y, size) {
+  function labelBox(text, x, y, size, sub) {
     ctx.font = '500 ' + size + 'px "JetBrains Mono", ui-monospace, monospace';
     if ('letterSpacing' in ctx) ctx.letterSpacing = '0.16em';
     var w = ctx.measureText(text).width;
-    return { l: x - w / 2 - 12, r: x + w / 2 + 12, t: y - size - 8, b: y + 8 };
+    if (sub) {
+      ctx.font = 'italic 400 ' + (size + 3) + 'px "Newsreader", Georgia, serif';
+      if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+      w = Math.max(w, ctx.measureText(sub).width);
+    }
+    return { l: x - w / 2 - 14, r: x + w / 2 + 14, t: y - size - 10, b: y + (sub ? size + 12 : 0) + 10 };
+  }
+
+  // second line under a name: what the body is for, in the page's serif
+  function subLabel(text, x, y, alpha, size) {
+    ctx.font = 'italic 400 ' + size + 'px "Newsreader", Georgia, serif';
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(' + RGB.star + ',' + alpha + ')';
+    ctx.fillText(text, x, y);
   }
 
   function clashes(box, boxes) {
@@ -216,24 +226,29 @@
   }
 
   // Labels are placed last. The sun's name always shows; a planet's name fades out while it would touch
-  // another label or the copy, and fades back once the orbits carry them apart. Nothing is ever stacked.
+  // another label or the screen edge, and fades back once the orbits carry them apart. Nothing is ever stacked.
   function drawLabels() {
     var boxes = [];
-    var sunY = cy + R * 0.04 + 24;
-    boxes.push(labelBox('SUPERINTELLIGENCE', cx, sunY, 11));
-    label('SUPERINTELLIGENCE', cx, sunY, hovered === 'sun' ? 1 : 0.85, 'center', 11);
+    var sunSize = narrow ? 11 : 13, sunY = cy + R * 0.04 + 28, sunSub = 'where all three point';
+    boxes.push(labelBox('SUPERINTELLIGENCE', cx, sunY, sunSize, sunSub));
+    label('SUPERINTELLIGENCE', cx, sunY, hovered === 'sun' ? 1 : 0.92, 'center', sunSize);
+    subLabel(sunSub, cx, sunY + sunSize + 8, 0.55, sunSize + 2);
     var front = bodies.slice().sort(function (a, b) { return (hovered === b) - (hovered === a) || b.z - a.z; });
     front.forEach(function (b) {
       var text = (narrow ? b.name.split(' ')[0] : b.name).toUpperCase(), size = narrow ? 9 : 10;
-      var ly = b.y + b.s + 20, box = labelBox(text, b.x, ly, size);
-      var blocked = clashes(box, boxes) || box.l < textRight || box.r > W - 8;
-      var target = hovered === b ? 1 : (blocked ? 0 : 0.62);
+      var sub = narrow ? '' : b.role;
+      var ly = b.y + b.s + 22, box = labelBox(text, b.x, ly, size, sub);
+      var blocked = clashes(box, boxes) || box.l < 8 || box.r > W - 8;
+      var target = hovered === b ? 1 : (blocked ? 0 : 0.75);
       b.la = reduce ? target : b.la + (target - b.la) * Math.min(1, lastDt * 4);
       if (target > 0) boxes.push(box);
-      if (b.la > 0.02) label(text, b.x, ly, b.la.toFixed(3), 'center', size);
+      if (b.la > 0.02) {
+        label(text, b.x, ly, b.la.toFixed(3), 'center', size);
+        if (sub) subLabel(sub, b.x, ly + size + 7, (b.la * 0.7).toFixed(3), size + 3);
+      }
     });
     if (!narrow) {
-      var fx = cx + FRONTIER * R * 0.72, fy = cy - FRONTIER * R * TILT * 0.7 - 10;
+      var fx = cx + FRONTIER * R, fy = cy + 4;
       var fb = labelBox('LIMIT OF HUMAN CHECKING', fx, fy, 9);
       if (!clashes(fb, boxes) && fb.r < W - 8) label('LIMIT OF HUMAN CHECKING', fx, fy, 0.4, 'center', 9);
     }

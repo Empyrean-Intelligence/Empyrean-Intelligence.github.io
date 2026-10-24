@@ -330,8 +330,6 @@ a:focus-visible, button:focus-visible {
   position: relative;
   min-height: calc(100vh - 64px);
   min-height: calc(100svh - 64px);
-  display: flex;
-  align-items: flex-end;
   overflow: hidden;
   background: #07090C;
   color: #E9E6DF;
@@ -345,49 +343,56 @@ a:focus-visible, button:focus-visible {
   display: block;
 }
 
+/* soft vignette: the edges fall away into space, nothing sits on top of the system */
 .hero-space::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(7, 9, 12, 0.95) 0%, rgba(7, 9, 12, 0.6) 38%, rgba(7, 9, 12, 0) 62%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(7, 9, 12, 0) 55%, rgba(7, 9, 12, 0.75) 100%);
 }
 
-.hero-space-inner {
-  position: relative;
+.orbit-scroll {
+  position: absolute;
   z-index: 1;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
+  left: 50%;
+  bottom: var(--space-3);
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8F949B;
+  text-decoration: none;
+}
+
+.orbit-scroll:hover,
+.orbit-scroll:focus-visible {
+  color: #F4F1EA;
+}
+
+.orbit-scroll:focus-visible {
+  outline: 1px solid #4FB3AC;
+  outline-offset: 4px;
+}
+
+/* Mission: the statement, on the page's own ground, directly under the orbit */
+.mission {
   padding-top: var(--space-10);
   padding-bottom: var(--space-6);
 }
 
-.hero-copy {
-  max-width: 31rem;
-}
-
-.hero-space .hero-eyebrow {
-  color: #4FB3AC;
-}
-
-.hero-space .hero-mission {
-  color: #F4F1EA;
+.mission .hero-mission {
   font-size: 2rem;
   line-height: 1.15;
   text-wrap: balance;
 }
 
-.hero-space .hero-position {
-  color: #C4C1BA;
-  margin-bottom: var(--space-2);
-}
-
-.hero-note {
-  color: #8F949B;
+.mission-note {
+  color: var(--muted);
   font-size: 0.9375rem;
   line-height: 1.55;
+  margin-bottom: var(--space-4);
 }
 
 .orbit-legend {
@@ -406,25 +411,24 @@ a:focus-visible, button:focus-visible {
   display: inline-flex;
   align-items: center;
   gap: var(--space-1);
-  color: #E9E6DF;
+  color: var(--ink);
   text-decoration: none;
 }
 
 .orbit-legend a:hover,
 .orbit-legend a:focus-visible {
-  color: #FFFFFF;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 .orbit-legend a:focus-visible {
-  outline: 1px solid #4FB3AC;
+  outline: 1px solid var(--signal);
   outline-offset: 3px;
 }
 
 .orbit-legend em {
   font-style: normal;
-  color: #8F949B;
+  color: var(--muted);
 }
 
 .orbit-dot {
@@ -461,33 +465,13 @@ a:focus-visible, button:focus-visible {
 }
 
 @media (min-width: 640px) {
-  .hero-space .hero-mission {
+  .mission .hero-mission {
     font-size: 2.75rem;
   }
 }
 
 @media (min-width: 900px) {
-  .hero-space {
-    align-items: center;
-  }
-
-  .hero-space::after {
-    background: linear-gradient(to right, rgba(7, 9, 12, 0.92) 0%, rgba(7, 9, 12, 0.7) 30%, rgba(7, 9, 12, 0) 52%);
-  }
-
-  .hero-space-inner {
-    min-height: calc(100vh - 64px);
-    min-height: calc(100svh - 64px);
-    justify-content: space-between;
-    padding-top: var(--space-10);
-  }
-
-  .hero-copy {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  .hero-space .hero-mission {
+  .mission .hero-mission {
     font-size: 3.25rem;
   }
 }
@@ -537,10 +521,6 @@ a:focus-visible, button:focus-visible {
 
   .nav-links li:nth-child(4) {
     display: none; /* Contact: the footer section is one scroll away */
-  }
-
-  .hero-space-inner {
-    padding-top: 330px;
   }
 }
 
