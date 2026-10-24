@@ -2,6 +2,10 @@ const fs = require('fs');
 const path = require('path');
 
 const allowedNumbers = new Set([
+  // rl_depth_loop_v1 result_2026_10_18 (oracle - frozen, depth 4); 42 = outreach/vendor_census.jsonl records
+  '0.10', '0.04', '0.17', '42',
+  // harness_variance_v1 established: best-of-4 0.608 vs sample-t0.8 0.460, gap 0.148, noise floor 0.088, n=250
+  '0.608', '0.460', '0.148', '0.088', '250',
   '0.2', '0.1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
   '16', '45', '50', '57', '147', '155', '169', '353', '400', '413', '415', '466', '942',
   '1000', '1,000', '17.9', '15.6', '20.5', '13.8', '10.8', '17.5', '10.3', '6.5', '16.1',

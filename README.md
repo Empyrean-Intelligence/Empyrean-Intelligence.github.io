@@ -1,6 +1,6 @@
 # Empyrean Intelligence — Public Website
 
-Public website for **Empyrean Intelligence**, Free, open verification tools for Super Intelligence.
+Public website for **Empyrean Intelligence**, machines that learn from experience they can verify, beyond the point where humans can check.
 
 ---
 
