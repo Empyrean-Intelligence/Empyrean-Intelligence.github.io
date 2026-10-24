@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Empyrean Intelligence - Free, open verification tools for Super Intelligence
+   Empyrean Intelligence - Machines that learn from experience they can verify
    Design System: Instrument Panel / Lab Notebook
    ========================================================================== */
 
@@ -325,6 +325,173 @@ a:focus-visible, button:focus-visible {
   margin-bottom: var(--space-4);
 }
 
+/* Hero: the orbit. Deliberately one world (deep space) in both themes, so every color is explicit. */
+.hero-space {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  min-height: calc(100svh - 64px);
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #07090C;
+  color: #E9E6DF;
+}
+
+.orbit-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hero-space::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(7, 9, 12, 0.95) 0%, rgba(7, 9, 12, 0.6) 38%, rgba(7, 9, 12, 0) 62%);
+}
+
+.hero-space-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-6);
+}
+
+.hero-copy {
+  max-width: 31rem;
+}
+
+.hero-space .hero-eyebrow {
+  color: #4FB3AC;
+}
+
+.hero-space .hero-mission {
+  color: #F4F1EA;
+  font-size: 2rem;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.hero-space .hero-position {
+  color: #C4C1BA;
+  margin-bottom: var(--space-2);
+}
+
+.hero-note {
+  color: #8F949B;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+}
+
+.orbit-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.orbit-legend a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: #E9E6DF;
+  text-decoration: none;
+}
+
+.orbit-legend a:hover,
+.orbit-legend a:focus-visible {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.orbit-legend a:focus-visible {
+  outline: 1px solid #4FB3AC;
+  outline-offset: 3px;
+}
+
+.orbit-legend em {
+  font-style: normal;
+  color: #8F949B;
+}
+
+.orbit-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.orbit-dot-verify { background: #4FB3AC; box-shadow: 0 0 8px #4FB3AC; }
+.orbit-dot-continual { background: #E3B866; box-shadow: 0 0 8px #E3B866; }
+.orbit-dot-experience { background: #B2AAF6; box-shadow: 0 0 8px #B2AAF6; }
+
+.orbit-tip {
+  position: absolute;
+  z-index: 2;
+  max-width: 240px;
+  padding: 8px 10px;
+  pointer-events: none;
+  background: rgba(14, 17, 22, 0.92);
+  border: 1px solid rgba(233, 230, 223, 0.18);
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.45;
+  color: #C4C1BA;
+}
+
+.orbit-tip strong {
+  display: block;
+  color: #F4F1EA;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+@media (min-width: 640px) {
+  .hero-space .hero-mission {
+    font-size: 2.75rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero-space {
+    align-items: center;
+  }
+
+  .hero-space::after {
+    background: linear-gradient(to right, rgba(7, 9, 12, 0.92) 0%, rgba(7, 9, 12, 0.7) 30%, rgba(7, 9, 12, 0) 52%);
+  }
+
+  .hero-space-inner {
+    min-height: calc(100vh - 64px);
+    min-height: calc(100svh - 64px);
+    justify-content: space-between;
+    padding-top: var(--space-10);
+  }
+
+  .hero-copy {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .hero-space .hero-mission {
+    font-size: 3.25rem;
+  }
+}
+
 .hero-commands {
   display: flex;
   flex-direction: column;
@@ -353,6 +520,28 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   gap: 8px;
   white-space: nowrap;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+/* Narrow screens: keep the nav and the orbit inside the viewport */
+@media (max-width: 559px) {
+  .nav-links {
+    gap: var(--space-2);
+    font-size: 0.875rem;
+  }
+
+  .nav-wordmark {
+    font-size: 1.125rem;
+  }
+
+  .nav-links li:nth-child(4) {
+    display: none; /* Contact: the footer section is one scroll away */
+  }
+
+  .hero-space-inner {
+    padding-top: 330px;
+  }
 }
 
 .prompt-symbol {
