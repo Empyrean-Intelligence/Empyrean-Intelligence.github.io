@@ -501,6 +501,13 @@ a:focus-visible, button:focus-visible {
   color: var(--muted);
 }
 
+.post-correction {
+  font-size: 0.875rem;
+  border-left: 3px solid var(--warning);
+  background: var(--warning-bg);
+  padding: var(--space-2) var(--space-3);
+}
+
 .post-figure {
   margin: var(--space-4) 0;
 }

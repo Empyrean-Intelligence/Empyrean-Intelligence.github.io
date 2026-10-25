@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Only Correct Signal Teaches — Empyrean Intelligence</title>
-  <meta name="description" content="A 1.5B model trained by reinforcement against an exact checker learned depth-4 composition it lacked; coin-flip and failure-only reward, run identically, broke it instead.">
+  <meta name="description" content="A 1.5B model trained by reinforcement against a code-running checker learned depth-4 composition it lacked; coin-flip and failure-only reward, run identically, broke it instead.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=14">
+  <link rel="stylesheet" href="../css/style.css?v=15">
 </head>
 <body>
 
@@ -34,7 +34,7 @@
         <span class="eyebrow">Research &middot; Experiential learning &middot; 25 October 2026</span>
         <h1 class="post-title">Only correct signal teaches</h1>
         <p class="post-dek">
-          We trained a 1.5B model by reinforcement against an exact checker, next to three controls that differed
+          We trained a 1.5B model by reinforcement against a code-running checker, next to three controls that differed
           only in the reward. The checked reward taught the model a skill it did not have. Coin-flip reward and
           failure-only reward, run identically, did not teach it; they broke the model.
         </p>
@@ -45,7 +45,7 @@
           <h2>In short</h2>
           <ul>
             <li>Accuracy on depth-4 compositions, a skill the model lacked (5 in 100 before training), rose to
-              <strong>15 in 100</strong> with reward from an exact checker. Against an untrained copy:
+              <strong>15 in 100</strong> with reward from a checker that runs the code. Against an untrained copy:
               <strong>+0.100</strong>, 95% interval <strong>[+0.040, +0.170]</strong>.</li>
             <li>Coin-flip reward, with the same optimizer, steps, prompts and seed, did not move it: it fell to 0 in 100
               (<strong>&minus;0.050 [&minus;0.100, &minus;0.010]</strong> against the untrained copy).</li>
@@ -61,7 +61,7 @@
         <p>
           A model that teaches itself needs a training signal, and the cheapest signal is the model's own attempts,
           checked. Before building a loop on that idea we asked the narrow question it rests on: does reward from an
-          exact checker teach a model something it cannot already do, and is it the <em>correctness</em> of the
+          code-running checker teach a model something it cannot already do, and is it the <em>correctness</em> of the
           reward that teaches, or just the act of training?
         </p>
         <p>
@@ -75,8 +75,18 @@
         <p>
           The tasks are compositions of small program operations, generated at run time from a seed, so no
           particular task can be in any pretraining set. Difficulty is the depth of the composition, a dial with no
-          ceiling. An exact checker grades every answer against 12 hidden tests; we certified beforehand that the
-          checker cannot be passed by a wrong program at depths 1 to 12.
+          ceiling. A checker grades every answer by running it on 12 hidden tests. Before the run we measured how
+          often near-miss wrong programs get past those tests: between 0.7% and 4% at depths 1 to 8.
+        </p>
+        <p class="post-correction">
+          <strong>Correction, 25 October 2026.</strong> An earlier version of this page said the checker was certified
+          at depths 1 to 12 and could not be passed by a wrong program. Both were wrong: that certification belongs to
+          a later, fixed version of the task generator, and the one this run used was certified at depths 1 to 8, with
+          the small error rate above. That version also has three defects we found afterwards: 2 of 120 sampled tasks
+          had a wrong answer key, so a correct program fails; some steps change nothing, so a task's real depth can be
+          lower than its stated depth, mostly for text tasks; and a few tasks return their input unchanged. Every arm
+          saw exactly the same tasks, so the comparison between arms stands; the depths are nominal and the absolute
+          accuracies are understated. Our next experiment uses the fixed generator.
         </p>
         <p>
           We first measured where the model stops. Qwen2.5-1.5B-Instruct solved 0.33 of depth-1 and depth-2
