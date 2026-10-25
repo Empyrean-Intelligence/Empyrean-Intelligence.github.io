@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=10">
+  <link rel="stylesheet" href="css/style.css?v=14">
 </head>
 <body>
 
@@ -22,8 +22,9 @@
       <nav aria-label="Main Navigation">
         <ul class="nav-links">
           <li><a href="#work" class="nav-link">Work</a></li>
-          <li><a href="#evidence" class="nav-link">Evidence</a></li>
+          <li><a href="research/index.html" class="nav-link">Research</a></li>
           <li><a href="method.html" class="nav-link">Method</a></li>
+          <li><a href="#evidence" class="nav-link">Evidence</a></li>
           <li><a href="#contact" class="nav-link">Contact</a></li>
           <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
         </ul>
@@ -33,51 +34,143 @@
 
   <main class="site-main">
     <!-- Hero -->
-    <section class="hero-space" aria-label="Three problems orbiting superintelligence: verification, continual learning, and experience past the frontier">
+    <section class="hero-space" aria-label="Five problems orbiting superintelligence">
       <canvas class="orbit-canvas" data-orbit aria-hidden="true"></canvas>
       <div class="orbit-tip" aria-hidden="true" hidden></div>
-      <a class="orbit-scroll" href="#mission">The mission <span aria-hidden="true">&darr;</span></a>
+      <ul class="orbit-legend orbit-legend-hero" aria-label="The five problems in the orbit">
+        <li><a href="#work-verification"><span class="orbit-dot orbit-dot-verify"></span>Verification <em>the engine</em></a></li>
+        <li><a href="#work-sample"><span class="orbit-dot orbit-dot-sample"></span>Sample efficiency <em>research</em></a></li>
+        <li><a href="#work-continual"><span class="orbit-dot orbit-dot-continual"></span>Continual learning <em>research</em></a></li>
+        <li><a href="#work-experience"><span class="orbit-dot orbit-dot-experience"></span>Experiential learning <em>first run pending</em></a></li>
+        <li><a href="#work-rsi"><span class="orbit-dot orbit-dot-rsi"></span>Recursive self-improvement <em>research</em></a></li>
+      </ul>
     </section>
 
     <!-- Mission -->
     <section id="mission" class="hero mission">
       <div class="container">
         <div class="prose">
-          <span class="eyebrow">Superintelligence lab</span>
-          <h1 class="hero-mission">Machines that learn from experience they can verify.</h1>
+          <span class="eyebrow">The mission</span>
+          <h1 class="hero-mission">Superintelligence may be the most important event since the universe began, and the last invention humanity ever needs to make.</h1>
           <p class="hero-position">
-            The next leap will not come from more human data. It will come from systems that teach themselves on
-            problems with no difficulty ceiling, keep what they learn, and check their own work beyond the point where
-            humans can.
+            It should be built by the best minds alive, and built to benefit all of humanity. Empyrean works on the five
+            problems that stand between today's models and that future: experiential learning, continual learning,
+            sample efficiency, recursive self-improvement, and verification.
           </p>
           <p class="mission-note">
             Every result we report is pre-registered, run against matched controls, and published with its interval
             and its limits, including the results that come out negative.
           </p>
-          <ul class="orbit-legend" aria-label="The three problems in the orbit above">
-            <li><a href="#work"><span class="orbit-dot orbit-dot-verify"></span>Verification <em>the engine</em></a></li>
-            <li><a href="#work"><span class="orbit-dot orbit-dot-continual"></span>Continual learning <em>research</em></a></li>
-            <li><a href="#work"><span class="orbit-dot orbit-dot-experience"></span>Experience past the frontier <em>first run pending</em></a></li>
-          </ul>
+          <p class="mission-cta">
+            <a href="#contact">If you care about humanity above all else, join us &rarr;</a>
+          </p>
         </div>
       </div>
     </section>
 
     <hr class="section-rule">
 
-    <!-- The work: three pillars -->
+    <!-- How the five fit -->
+    <section id="map" class="container">
+      <div class="prose">
+        <span class="eyebrow">How the five fit</span>
+        <h2>What brings what</h2>
+        <p>
+          None of the five works alone. Each arrow is a dependency: the problem at its tail supplies something the
+          problem at its head cannot get any other way.
+        </p>
+      </div>
+      <figure class="fit-map">
+        <svg class="fit-map-svg" viewBox="0 0 760 620" role="img" aria-labelledby="fit-map-title fit-map-desc">
+          <title id="fit-map-title">How the five problems lead to superintelligence</title>
+          <desc id="fit-map-desc">Verification and sample efficiency feed experiential learning; experiential learning
+            feeds continual learning; continual learning feeds recursive self-improvement, which verification also
+            gates; recursive self-improvement leads to superintelligence.</desc>
+          <defs>
+            <marker id="fit-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z" class="fit-arrowhead"></path>
+            </marker>
+          </defs>
+
+          <path class="fit-edge" d="M380 130 L380 90" marker-end="url(#fit-arrow)"></path>
+          <path class="fit-edge" d="M380 250 L380 196" marker-end="url(#fit-arrow)"></path>
+          <path class="fit-edge" d="M380 370 L380 316" marker-end="url(#fit-arrow)"></path>
+          <path class="fit-edge" d="M170 510 C170 470, 300 470, 320 438" marker-end="url(#fit-arrow)"></path>
+          <path class="fit-edge" d="M590 510 C590 470, 460 470, 440 438" marker-end="url(#fit-arrow)"></path>
+          <path class="fit-edge fit-edge-gate" d="M70 510 C40 360, 120 180, 246 162" marker-end="url(#fit-arrow)"></path>
+          <text class="fit-edge-label" x="58" y="330" transform="rotate(-78 58 330)">gates every self-update</text>
+
+          <g class="fit-node fit-node-goal">
+            <rect x="230" y="20" width="300" height="70" rx="35"></rect>
+            <text class="fit-name" x="380" y="52" text-anchor="middle">Superintelligence</text>
+            <text class="fit-brings" x="380" y="72" text-anchor="middle">where all five point</text>
+          </g>
+          <g class="fit-node">
+            <rect x="250" y="130" width="260" height="66" rx="4"></rect>
+            <circle class="fit-dot fit-dot-rsi" cx="272" cy="156" r="5"></circle>
+            <text class="fit-name" x="286" y="161">Recursive self-improvement</text>
+            <text class="fit-brings" x="272" y="182">brings: a learner that improves the loop</text>
+          </g>
+          <g class="fit-node">
+            <rect x="250" y="250" width="260" height="66" rx="4"></rect>
+            <circle class="fit-dot fit-dot-continual" cx="272" cy="276" r="5"></circle>
+            <text class="fit-name" x="286" y="281">Continual learning</text>
+            <text class="fit-brings" x="272" y="302">brings: gains that add up, not overwrite</text>
+          </g>
+          <g class="fit-node">
+            <rect x="250" y="370" width="260" height="66" rx="4"></rect>
+            <circle class="fit-dot fit-dot-experience" cx="272" cy="396" r="5"></circle>
+            <text class="fit-name" x="286" y="401">Experiential learning</text>
+            <text class="fit-brings" x="272" y="422">brings: new data past where human data ends</text>
+          </g>
+          <g class="fit-node">
+            <rect x="40" y="510" width="260" height="66" rx="4"></rect>
+            <circle class="fit-dot fit-dot-verify" cx="62" cy="536" r="5"></circle>
+            <text class="fit-name" x="76" y="541">Verification</text>
+            <text class="fit-brings" x="62" y="562">brings: a signal that cannot be gamed</text>
+          </g>
+          <g class="fit-node">
+            <rect x="460" y="510" width="260" height="66" rx="4"></rect>
+            <circle class="fit-dot fit-dot-sample" cx="482" cy="536" r="5"></circle>
+            <text class="fit-name" x="496" y="541">Sample efficiency</text>
+            <text class="fit-brings" x="482" y="562">brings: more learned per checked attempt</text>
+          </g>
+        </svg>
+        <ol class="fit-map-list" aria-label="What each problem brings">
+          <li><strong>Verification</strong> brings a signal that cannot be gamed. It feeds experiential learning and gates every self-update.</li>
+          <li><strong>Sample efficiency</strong> brings more learned per checked attempt. It makes experiential learning affordable.</li>
+          <li><strong>Experiential learning</strong> brings new data past where human data ends. It feeds continual learning.</li>
+          <li><strong>Continual learning</strong> brings gains that add up instead of overwriting each other. It feeds recursive self-improvement.</li>
+          <li><strong>Recursive self-improvement</strong> brings a learner that improves the loop itself. It is the road to superintelligence.</li>
+        </ol>
+      </figure>
+    </section>
+
+    <hr class="section-rule">
+
+    <!-- The work: five problems -->
     <section id="work" class="container">
       <div class="prose">
         <span class="eyebrow">The Work</span>
-        <h2>Three problems, one engine</h2>
+        <h2>Five problems, one engine</h2>
         <p>
-          Verification is the engine of all three: a model can only teach itself, or keep what it learned, if the
-          signal it learns from cannot be fooled.
+          Verification is the engine of the other four: a model can only teach itself, keep what it learned, or
+          improve its own learning if the signal it learns from cannot be fooled.
         </p>
 
         <div class="problems-list">
-          <div class="problem-row">
-            <span class="problem-name">1. Experience past the frontier</span>
+          <div class="problem-row" id="work-verification">
+            <span class="problem-name">Verification</span>
+            <span class="problem-status-shipped">Shipped work</span>
+          </div>
+          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
+            Machines that check what humans cannot. We measure how often today's checks are fooled, in benchmarks,
+            RL environments and self-improvement claims, with an independent oracle, and we build the checks that are
+            not.
+          </p>
+
+          <div class="problem-row" id="work-experience">
+            <span class="problem-name">Experiential learning</span>
             <span class="problem-status-research">Built &middot; first run pending</span>
           </div>
           <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
@@ -87,8 +180,8 @@
             unit of experience, not a gap to any one model.
           </p>
 
-          <div class="problem-row">
-            <span class="problem-name">2. Continual learning</span>
+          <div class="problem-row" id="work-continual">
+            <span class="problem-name">Continual learning</span>
             <span class="problem-status-research">Research</span>
           </div>
           <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
@@ -96,17 +189,28 @@
             verifier decides which experiences are safe to keep. Three studies so far, none positive: a forgetting
             effect we predicted came out in the opposite direction; a per-item learning cap was uninformative under
             its own pre-set rule; and an agent reflecting on feedback with frozen weights did not clear the bar we set
-            for learning. The next design is registered after the first pillar reads.
+            for learning.
           </p>
 
-          <div class="problem-row">
-            <span class="problem-name">3. A verifier beyond human checking</span>
-            <span class="problem-status-shipped">Shipped work</span>
+          <div class="problem-row" id="work-sample">
+            <span class="problem-name">Sample efficiency</span>
+            <span class="problem-status-research">Research</span>
           </div>
           <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
-            Machines that check what humans cannot. We measure how often today's checks are fooled, in benchmarks,
-            RL environments and self-improvement claims, with an independent oracle, and we build the checks that are
-            not.
+            How much does one checked attempt teach? In our reinforcement-learning run, 60 training steps moved
+            depth-4 accuracy from 5 in 100 to 15 in 100. Every run we register now reports its gain per verified
+            attempt, so efficiency becomes a measured curve rather than a claim.
+          </p>
+
+          <div class="problem-row" id="work-rsi">
+            <span class="problem-name">Recursive self-improvement</span>
+            <span class="problem-status-research">Research</span>
+          </div>
+          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
+            A model that improves the process that improves it. In small controlled loops, the learner improved when
+            its problems and its checking came from outside it; at 1.5B, fine-tuning on its own verified successes
+            produced no measurable gain. The closed reinforcement-learning loop is registered next, against a matched
+            control.
           </p>
         </div>
       </div>
@@ -124,6 +228,7 @@
           1.5B model, reward from an exact checker raised depth-4 composition accuracy by <strong>+0.10</strong>
           (95% interval [+0.04, +0.17]) over a frozen copy, while an otherwise identical run with coin-flip reward did
           not improve. It did not transfer to an outside math benchmark, and we report that too.
+          <a href="research/correct-signal-teaches.html">Read the full write-up &rarr;</a>
         </p>
         <p>
           <strong>Benchmarks accept broken solutions.</strong> Our open tool <code>gameability</code> finds that
@@ -245,6 +350,6 @@
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="js/orbit.js?v=12"></script>
+  <script src="js/orbit.js?v=13"></script>
 </body>
 </html>

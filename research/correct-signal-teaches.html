@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Only Correct Signal Teaches — Empyrean Intelligence</title>
+  <meta name="description" content="A 1.5B model trained by reinforcement against an exact checker learned depth-4 composition it lacked; coin-flip and failure-only reward, run identically, broke it instead.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=14">
+</head>
+<body>
+
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-wordmark">Empyrean</a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../index.html#work" class="nav-link">Work</a></li>
+          <li><a href="index.html" class="nav-link active">Research</a></li>
+          <li><a href="../method.html" class="nav-link">Method</a></li>
+          <li><a href="../index.html#evidence" class="nav-link">Evidence</a></li>
+          <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+          <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <article class="container post">
+      <header class="prose post-head">
+        <span class="eyebrow">Research &middot; Experiential learning &middot; 25 October 2026</span>
+        <h1 class="post-title">Only correct signal teaches</h1>
+        <p class="post-dek">
+          We trained a 1.5B model by reinforcement against an exact checker, next to three controls that differed
+          only in the reward. The checked reward taught the model a skill it did not have. Coin-flip reward and
+          failure-only reward, run identically, did not teach it; they broke the model.
+        </p>
+      </header>
+
+      <div class="prose">
+        <aside class="post-summary" aria-label="Summary">
+          <h2>In short</h2>
+          <ul>
+            <li>Accuracy on depth-4 compositions, a skill the model lacked (5 in 100 before training), rose to
+              <strong>15 in 100</strong> with reward from an exact checker. Against an untrained copy:
+              <strong>+0.100</strong>, 95% interval <strong>[+0.040, +0.170]</strong>.</li>
+            <li>Coin-flip reward, with the same optimizer, steps, prompts and seed, did not move it: it fell to 0 in 100
+              (<strong>&minus;0.050 [&minus;0.100, &minus;0.010]</strong> against the untrained copy).</li>
+            <li>Failure-only reward also fell to 0 in 100. Every answer it wrote at the end was a syntax error.</li>
+            <li>The checked-reward gain cost no measurable math ability (GSM8K <strong>&minus;0.050 [&minus;0.111,
+              +0.017]</strong>), and did not transfer to it either.</li>
+            <li>One seed, 60 steps, one depth. It confirms a published finding under our controls; it is not a new
+              mechanism. It is the base the next experiment builds on.</li>
+          </ul>
+        </aside>
+
+        <h2>The question</h2>
+        <p>
+          A model that teaches itself needs a training signal, and the cheapest signal is the model's own attempts,
+          checked. Before building a loop on that idea we asked the narrow question it rests on: does reward from an
+          exact checker teach a model something it cannot already do, and is it the <em>correctness</em> of the
+          reward that teaches, or just the act of training?
+        </p>
+        <p>
+          The second half matters. Reinforcement learning can raise scores with rewards that carry no information at
+          all, when the data the model is tested on resembles what it already saw in pretraining. The way to tell
+          the two apart is to run the same training with a reward that is deliberately meaningless, on tasks the model
+          cannot have memorised.
+        </p>
+
+        <h2>Setup</h2>
+        <p>
+          The tasks are compositions of small program operations, generated at run time from a seed, so no
+          particular task can be in any pretraining set. Difficulty is the depth of the composition, a dial with no
+          ceiling. An exact checker grades every answer against 12 hidden tests; we certified beforehand that the
+          checker cannot be passed by a wrong program at depths 1 to 12.
+        </p>
+        <p>
+          We first measured where the model stops. Qwen2.5-1.5B-Instruct solved 0.33 of depth-1 and depth-2
+          compositions, 0.17 at depth 3, 0.04 at depths 4 and 5, and nothing beyond. Its frontier is depth 2. We trained
+          on depths 2 and 3 and tested on depth 4: one step past anything it was trained on.
+        </p>
+        <p>
+          Four arms, identical in model, optimizer (GRPO with a rank-64 LoRA on all seven linear modules), 60 steps of
+          8 prompts with 8 samples each, prompts and seed. Only the reward differs:
+        </p>
+        <div class="table-wrap">
+          <table class="post-table">
+            <thead>
+              <tr><th scope="col">Arm</th><th scope="col">Reward</th><th scope="col">Role</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Checked</td><td>1 if the program passes all 12 hidden tests, else 0</td><td>the treatment</td></tr>
+              <tr><td>Coin-flip</td><td>1 or 0 at random, independent of the answer</td><td>the spurious-reward control</td></tr>
+              <tr><td>Failure-only</td><td>&minus;1 if the program fails, 0 if it passes</td><td>learns only from mistakes</td></tr>
+              <tr><td>Untrained</td><td>no training</td><td>the baseline</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>The rule, written before any code</h2>
+        <p>
+          The verdict was fixed in our ledger before the notebook existed. The run counts as
+          <strong>only correct signal teaches</strong> if, at a test depth, the checked arm beats the untrained copy
+          with an interval that excludes zero, the coin-flip arm does not, and the checked arm also beats the
+          coin-flip arm. If coin-flip reward had moved the score too, the verdict would have been
+          <strong>random teaches</strong>, and we would have reported that instead. With 100 test tasks the run was
+          sized to detect an effect of about 0.13 reliably; the verdict itself is read from the intervals, not from
+          that number.
+        </p>
+
+        <h2>Results</h2>
+        <figure class="post-figure" aria-labelledby="fig-depth4">
+          <figcaption id="fig-depth4">Depth-4 accuracy after training (100 held-out tasks, greedy decoding). Every arm
+            started at 0.05.</figcaption>
+          <div class="bars">
+            <div class="bar-row"><span class="bar-label">Checked</span><span class="bar-track"><span class="bar bar-signal" style="width: 100%;"></span></span><span class="bar-value">0.15</span></div>
+            <div class="bar-row"><span class="bar-label">Untrained</span><span class="bar-track"><span class="bar" style="width: 33.3%;"></span></span><span class="bar-value">0.05</span></div>
+            <div class="bar-row"><span class="bar-label">Coin-flip</span><span class="bar-track"><span class="bar bar-warning" style="width: 0%;"></span></span><span class="bar-value">0.00</span></div>
+            <div class="bar-row"><span class="bar-label">Failure-only</span><span class="bar-track"><span class="bar bar-warning" style="width: 0%;"></span></span><span class="bar-value">0.00</span></div>
+          </div>
+        </figure>
+
+        <div class="table-wrap">
+          <table class="post-table post-table-num">
+            <thead>
+              <tr><th scope="col">Comparison</th><th scope="col">Depth 4 (trained 2&ndash;3)</th><th scope="col">Depth 3</th><th scope="col">GSM8K (outside)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Checked &minus; untrained</td><td><strong>+0.100</strong> [+0.040, +0.170]</td><td>&minus;0.033 [&minus;0.117, +0.050]</td><td>&minus;0.050 [&minus;0.111, +0.017]</td></tr>
+              <tr><td>Checked &minus; coin-flip</td><td>+0.150 [+0.090, +0.220]</td><td>&ndash;</td><td>&ndash;</td></tr>
+              <tr><td>Coin-flip &minus; untrained</td><td>&minus;0.050 [&minus;0.100, &minus;0.010]</td><td>&minus;0.167 [&minus;0.267, &minus;0.067]</td><td>0.217 vs 0.70</td></tr>
+              <tr><td>Failure-only &minus; untrained</td><td>&minus;0.050 [&minus;0.100, &minus;0.010]</td><td>&minus;0.167 [&minus;0.267, &minus;0.067]</td><td>0.156 vs 0.70</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="post-note">
+          95% intervals. Depth 4: 100 tasks; depth 3: 60 tasks; GSM8K: 180 problems, where the untrained model scores
+          0.70 and the checked arm 0.65. The untrained copy scored identically before and after the run (drift
+          +0.000), so the evaluation itself is not the source of any difference.
+        </p>
+
+        <h2>Why each arm failed</h2>
+        <p>
+          A difference between arms means little until you know <em>how</em> each one failed. We classified every
+          final answer at depth 4:
+        </p>
+        <div class="table-wrap">
+          <table class="post-table post-table-num">
+            <thead>
+              <tr><th scope="col">Arm, per 100 tasks</th><th scope="col">Passes</th><th scope="col">Partly right</th><th scope="col">Wrong</th><th scope="col">Syntax error</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Checked</td><td>15</td><td>5</td><td>72</td><td>8</td></tr>
+              <tr><td>Coin-flip</td><td>0</td><td>0</td><td>16</td><td>84</td></tr>
+              <tr><td>Failure-only</td><td>0</td><td>0</td><td>0</td><td>100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="post-note">
+          The final evaluation was repeated when a free GPU session resumed, so raw tallies are multiples of 100;
+          decoding is greedy, each repeat gives the same answers, and the counts above are divided by the number of
+          repeats.
+        </p>
+        <p>
+          Both controls destroyed the model's ability to write code, and with it most of its math: GSM8K fell from
+          0.70 to 0.22 under coin-flip reward and to 0.16 under failure-only reward. That changes how the result should
+          be read. The gap between the checked arm and the coin-flip arm (+0.150) is partly "random reward breaks the
+          model". The clean claim is the comparison with the untrained copy: <strong>+0.100 [+0.040, +0.170]</strong>,
+          a skill gained at no measurable cost.
+        </p>
+
+        <h2>What this does not show</h2>
+        <ul>
+          <li><strong>One seed.</strong> A replicate is needed before the size of the gain means anything precise.</li>
+          <li><strong>One depth.</strong> The gain appears at depth 4 and not at depth 3 (&minus;0.033 [&minus;0.117,
+            +0.050]). We do not have an explanation yet.</li>
+          <li><strong>No transfer.</strong> Nothing moved on GSM8K. The skill is narrow.</li>
+          <li><strong>Not a new mechanism.</strong> It reproduces, under matched controls and on uncontaminated
+            tasks, the finding that on clean data only correct rewards move a model
+            (<a href="https://arxiv.org/abs/2507.10532">Wu et al., arXiv 2507.10532</a>).</li>
+          <li><strong>Learning only from failures did not work here.</strong> The failure-only arm is a published
+            idea; at this scale and with this reward it collapsed.</li>
+        </ul>
+
+        <h2>Why it matters, and what is next</h2>
+        <p>
+          A model can only teach itself past the point where human data runs out if checked experience is enough to
+          learn from. This run says it is, at least one step past the frontier, and that the checking is what does the
+          work: the same training with an uninformative reward did harm, not good. Earlier, at the same scale,
+          fine-tuning on the model's own verified successes produced no measurable gain. Reinforcement against the
+          checker did.
+        </p>
+        <p>
+          The next experiment lets the model choose its own level on an unbounded ladder and measures the slope:
+          levels climbed per thousand verified attempts, against the same recipe with coin-flip reward, a fixed
+          curriculum and an untrained copy. It is built and registered, with its decision rule written first, and its
+          first run is pending.
+        </p>
+
+        <h2>Details</h2>
+        <ul class="post-details">
+          <li>Model: Qwen2.5-1.5B-Instruct. Training: GRPO, LoRA rank 64 on all seven linear modules, group size 8,
+            60 steps &times; 8 prompts = 3,840 rollouts per trained arm.</li>
+          <li>Hardware: one free Colab T4, across several sessions with checkpoint and resume.</li>
+          <li>Run: completed 18 October 2026. Ledger entry <code>rl_depth_loop_v1</code>.</li>
+          <li>Every number on this page was printed by the run and checked a second way: per-arm accuracies decoded
+            from the run's output reproduce each printed difference.</li>
+        </ul>
+
+        <p class="post-back"><a href="index.html">&larr; All research</a></p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><span class="mono">Empyrean Intelligence</span> &mdash; Machines that learn from experience they can verify</div>
+      <div>Pre-registered. Controlled. Published with limits.</div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>

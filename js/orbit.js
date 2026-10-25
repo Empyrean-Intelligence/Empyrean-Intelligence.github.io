@@ -1,4 +1,4 @@
-// Empyrean Intelligence - hero orbit: the three pillars circling the destination.
+// Empyrean Intelligence - hero orbit: the five problems circling the destination.
 // Canvas 2D, zero dependencies. One static frame under prefers-reduced-motion.
 
 (function () {
@@ -11,20 +11,35 @@
   var ctx = canvas.getContext('2d');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var RGB = { sun: '255,232,190', teal: '79,179,172', gold: '227,184,102', violet: '178,170,246', star: '233,230,223' };
-  var TILT = 0.34;        // vertical squash of every orbit: the plane is seen from above (set per width in resize)
+  var RGB = { sun: '255,232,190', teal: '79,179,172', sky: '122,176,236', gold: '227,184,102',
+              violet: '178,170,246', rose: '232,142,156', star: '233,230,223' };
+  var TILT = 0.4;         // vertical squash of every orbit: the plane is seen from above (set per width in resize)
   var narrow = false;
-  var FRONTIER = 0.83;    // dashed ring: the limit of human checking
+  var FRONTIER = 0.69;    // dashed ring: the limit of human checking
+  var SPIN = 0.05;        // the whole system turns together, so the bodies keep their spacing
 
+  // inner to outer. `slot` spreads them around the circle: neighbouring orbits sit 144 degrees apart
   var bodies = [
-    { key: 'verify', name: 'Verification', role: 'the engine', status: 'The engine: checks that cannot be fooled',
-      rgb: RGB.teal, orbit: 0.34, size: 7, speed: 0.15, phase: 0.6, spawn: 6 },
-    { key: 'continual', name: 'Continual learning', role: 'keeps what it learns', status: 'Keeps what it learns, forgets nothing: research',
-      rgb: RGB.gold, orbit: 0.63, size: 9, speed: 0.08, phase: 2.6, spawn: 8 },
-    { key: 'experience', name: 'Experience past the frontier', role: 'teaches itself', status: 'Self-taught, exactly checked: built, first run pending',
-      rgb: RGB.violet, orbit: 1.0, size: 11, speed: 0.045, phase: 4.5, spawn: 12 }
+    { key: 'verify', name: 'Verification', short: 'Verification', role: 'the engine',
+      status: 'The engine: checks that cannot be fooled. Shipped tools and audits.',
+      rgb: RGB.teal, orbit: 0.22, size: 6, slot: 0 },
+    { key: 'sample', name: 'Sample efficiency', short: 'Efficiency', role: 'more from every attempt',
+      status: 'More learned from each verified attempt: research',
+      rgb: RGB.sky, orbit: 0.40, size: 7, slot: 2 },
+    { key: 'continual', name: 'Continual learning', short: 'Continual', role: 'keeps what it learns',
+      status: 'Keeps every verified gain: research, three null results so far',
+      rgb: RGB.gold, orbit: 0.57, size: 8.5, slot: 4 },
+    { key: 'experience', name: 'Experiential learning', short: 'Experience', role: 'teaches itself',
+      status: 'Teaches itself past the human frontier: built, first run pending',
+      rgb: RGB.violet, orbit: 0.79, size: 10, slot: 1 },
+    { key: 'rsi', name: 'Recursive self-improvement', short: 'RSI', role: 'improves the learner',
+      status: 'The loop improves the learner itself: research',
+      rgb: RGB.rose, orbit: 1.0, size: 11, slot: 3 }
   ];
-  bodies.forEach(function (b) { b.flash = 0; b.acc = 0; b.x = 0; b.y = 0; b.z = 0; b.s = b.size; b.la = 0; });
+  bodies.forEach(function (b, i) {
+    b.phase = b.slot * 6.2832 / 5 + 0.5; b.wob = i * 1.7;
+    b.flash = 0; b.acc = 0; b.x = 0; b.y = 0; b.z = 0; b.s = b.size; b.la = 0; b.ang = 0;
+  });
 
   var W = 0, H = 0, cx = 0, cy = 0, R = 0, dpr = 1, lastDt = 0;
   var stars = [], particles = [], pulses = [];
@@ -39,11 +54,10 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     narrow = W < 560;
     TILT = narrow ? 0.62 : 0.4;
-    // the system alone fills the hero, centred; the outer orbit's height stays inside ~80% of the hero
+    // the system fills the hero; the bottom band is left for the legend the stylesheet places there
     cx = W * 0.5;
-    cy = H * 0.48;
-    // on phones the outer orbit runs past the screen edges; labels that would clip fade out
-    R = Math.min(W * (narrow ? 0.56 : 0.42), H * 0.4 / TILT);
+    cy = H * (narrow ? 0.42 : 0.44);
+    R = Math.min(W * (narrow ? 0.56 : 0.43), H * 0.34 / TILT);
     var n = Math.min(420, Math.round(W * H / 3200));
     stars = [];
     for (var i = 0; i < n; i++) {
@@ -60,36 +74,38 @@
   function update(dt) {
     t += dt; lastDt = dt;
     bodies.forEach(function (b) {
-      var p = project(b.orbit, b.phase + t * b.speed);
+      // shared spin plus a small sway of its own: alive, but never bunched
+      b.ang = b.phase + t * SPIN + 0.14 * Math.sin(t * 0.23 + b.wob);
+      var p = project(b.orbit, b.ang);
       b.x = p.x; b.y = p.y; b.z = p.z; b.s = b.size * Math.max(0.8, R / 420) * (1 + 0.2 * p.z);
       b.flash = Math.max(0, b.flash - dt * 0.9);
-      b.acc += dt * b.spawn;
-      while (b.acc >= 1 && particles.length < 520) {
+      b.acc += dt * 3.2;
+      while (b.acc >= 1 && particles.length < 420) {
         b.acc -= 1;
-        particles.push({ a: b.phase + t * b.speed + (Math.random() - 0.5) * 0.08,
-                         r: b.orbit + (Math.random() - 0.5) * 0.07, rgb: b.rgb, w: 0.4 + Math.random() * 0.8,
+        particles.push({ a: b.ang + (Math.random() - 0.5) * 0.1,
+                         r: b.orbit + (Math.random() - 0.5) * 0.06, rgb: b.rgb, w: 0.35 + Math.random() * 0.7,
                          v: 0.6 + Math.random() * 0.8 });
       }
     });
     for (var i = particles.length - 1; i >= 0; i--) {
       var q = particles[i];
-      q.r -= dt * 0.055 * q.v * (0.35 + q.r);
-      q.a += dt * 0.09 / Math.max(q.r, 0.09);
+      q.r -= dt * 0.045 * q.v * (0.35 + q.r);
+      q.a += dt * (SPIN + 0.05 / Math.max(q.r, 0.1));
       if (q.r < 0.05) particles.splice(i, 1);
     }
     pulseClock -= dt;
     if (pulseClock <= 0) {
-      pulseClock = 3.6;
+      pulseClock = 4.2;
       pulses.push({ x: bodies[0].x, y: bodies[0].y, rad: 0, hit: {} });
     }
     for (var j = pulses.length - 1; j >= 0; j--) {
       var pu = pulses[j];
-      pu.rad += dt * R * 0.62;
+      pu.rad += dt * R * 0.55;
       for (var k = 1; k < bodies.length; k++) {
         var b2 = bodies[k];
         if (!pu.hit[b2.key] && Math.hypot(b2.x - pu.x, b2.y - pu.y) < pu.rad) { pu.hit[b2.key] = true; b2.flash = 1; }
       }
-      if (pu.rad > R * 1.9) pulses.splice(j, 1);
+      if (pu.rad > R * 2.2) pulses.splice(j, 1);
     }
   }
 
@@ -106,12 +122,12 @@
   function drawOrbits() {
     ctx.lineWidth = 1;
     bodies.forEach(function (b) {
-      ctx.strokeStyle = 'rgba(' + RGB.star + ',' + (hovered === b ? 0.32 : 0.11) + ')';
+      ctx.strokeStyle = 'rgba(' + RGB.star + ',' + (hovered === b ? 0.34 : 0.09) + ')';
       ctx.beginPath(); ctx.ellipse(cx, cy, b.orbit * R, b.orbit * R * TILT, 0, 0, 6.2832); ctx.stroke();
     });
     ctx.save();
     ctx.setLineDash([3, 7]);
-    ctx.strokeStyle = 'rgba(' + RGB.star + ',0.22)';
+    ctx.strokeStyle = 'rgba(' + RGB.star + ',0.2)';
     ctx.beginPath(); ctx.ellipse(cx, cy, FRONTIER * R, FRONTIER * R * TILT, 0, 0, 6.2832); ctx.stroke();
     ctx.restore();
   }
@@ -121,10 +137,10 @@
     ctx.globalCompositeOperation = 'lighter';
     for (var i = 0; i < particles.length; i++) {
       // each mote is a short streak along its inward spiral, brightening as it nears the centre
-      var q = particles[i], p = project(q.r, q.a), back = project(q.r + 0.03, q.a - 0.05 / Math.max(q.r, 0.09));
-      var a = Math.min(1, q.r * 4) * (0.28 + 0.3 * (1 - q.r));
+      var q = particles[i], p = project(q.r, q.a), back = project(q.r + 0.025, q.a - 0.04 / Math.max(q.r, 0.1));
+      var a = Math.min(1, q.r * 4) * (0.16 + 0.26 * (1 - q.r));
       ctx.strokeStyle = 'rgba(' + q.rgb + ',' + a.toFixed(3) + ')';
-      ctx.lineWidth = q.w * (R / 300) + 0.5;
+      ctx.lineWidth = q.w * (R / 320) + 0.4;
       ctx.beginPath(); ctx.moveTo(back.x, back.y); ctx.lineTo(p.x, p.y); ctx.stroke();
     }
     ctx.restore();
@@ -132,35 +148,35 @@
 
   function drawPulses() {
     pulses.forEach(function (pu) {
-      var a = Math.max(0, 0.45 * (1 - pu.rad / (R * 1.9)));
+      var a = Math.max(0, 0.32 * (1 - pu.rad / (R * 2.2)));
       ctx.strokeStyle = 'rgba(' + RGB.teal + ',' + a.toFixed(3) + ')';
-      ctx.lineWidth = 1.2;
-      ctx.beginPath(); ctx.ellipse(pu.x, pu.y, pu.rad, pu.rad * 0.62, 0, 0, 6.2832); ctx.stroke();
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.ellipse(pu.x, pu.y, pu.rad, pu.rad * TILT * 1.4, 0, 0, 6.2832); ctx.stroke();
     });
   }
 
   function drawSun() {
     var breathe = 1 + 0.06 * Math.sin(t * 0.9);
-    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.34 * breathe);
+    var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * 0.3 * breathe);
     g.addColorStop(0, 'rgba(' + RGB.sun + ',0.95)');
-    g.addColorStop(0.12, 'rgba(' + RGB.sun + ',0.55)');
-    g.addColorStop(0.35, 'rgba(240,190,120,0.16)');
+    g.addColorStop(0.13, 'rgba(' + RGB.sun + ',0.5)');
+    g.addColorStop(0.38, 'rgba(240,190,120,0.13)');
     g.addColorStop(1, 'rgba(240,190,120,0)');
     ctx.fillStyle = g;
-    ctx.beginPath(); ctx.arc(cx, cy, R * 0.34 * breathe, 0, 6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.3 * breathe, 0, 6.2832); ctx.fill();
     ctx.fillStyle = 'rgba(255,248,232,1)';
-    ctx.beginPath(); ctx.arc(cx, cy, R * 0.04, 0, 6.2832); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, R * 0.036, 0, 6.2832); ctx.fill();
   }
 
   function drawBody(b) {
     // trail along the orbit
-    for (var k = 1; k <= 16; k++) {
-      var p = project(b.orbit, b.phase + (t - k * 0.09) * b.speed);
-      ctx.fillStyle = 'rgba(' + b.rgb + ',' + (0.28 * (1 - k / 17)).toFixed(3) + ')';
-      ctx.beginPath(); ctx.arc(p.x, p.y, b.s * 0.32 * (1 - k / 20), 0, 6.2832); ctx.fill();
+    for (var k = 1; k <= 14; k++) {
+      var p = project(b.orbit, b.ang - k * 0.012);
+      ctx.fillStyle = 'rgba(' + b.rgb + ',' + (0.24 * (1 - k / 15)).toFixed(3) + ')';
+      ctx.beginPath(); ctx.arc(p.x, p.y, b.s * 0.3 * (1 - k / 18), 0, 6.2832); ctx.fill();
     }
     var halo = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.s * (3.2 + b.flash * 2));
-    halo.addColorStop(0, 'rgba(' + b.rgb + ',' + (0.30 + b.flash * 0.35).toFixed(3) + ')');
+    halo.addColorStop(0, 'rgba(' + b.rgb + ',' + (0.3 + b.flash * 0.35).toFixed(3) + ')');
     halo.addColorStop(1, 'rgba(' + b.rgb + ',0)');
     ctx.fillStyle = halo;
     ctx.beginPath(); ctx.arc(b.x, b.y, b.s * (3.2 + b.flash * 2), 0, 6.2832); ctx.fill();
@@ -196,6 +212,15 @@
     ctx.fillText(text, x, y);
   }
 
+  // second line under a name: what the body is for, in the page's serif
+  function subLabel(text, x, y, alpha, size) {
+    ctx.font = 'italic 400 ' + size + 'px "Newsreader", Georgia, serif';
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(' + RGB.star + ',' + alpha + ')';
+    ctx.fillText(text, x, y);
+  }
+
   function labelBox(text, x, y, size, sub) {
     ctx.font = '500 ' + size + 'px "JetBrains Mono", ui-monospace, monospace';
     if ('letterSpacing' in ctx) ctx.letterSpacing = '0.16em';
@@ -206,15 +231,6 @@
       w = Math.max(w, ctx.measureText(sub).width);
     }
     return { l: x - w / 2 - 14, r: x + w / 2 + 14, t: y - size - 10, b: y + (sub ? size + 12 : 0) + 10 };
-  }
-
-  // second line under a name: what the body is for, in the page's serif
-  function subLabel(text, x, y, alpha, size) {
-    ctx.font = 'italic 400 ' + size + 'px "Newsreader", Georgia, serif';
-    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
-    ctx.textAlign = 'center';
-    ctx.fillStyle = 'rgba(' + RGB.star + ',' + alpha + ')';
-    ctx.fillText(text, x, y);
   }
 
   function clashes(box, boxes) {
@@ -229,16 +245,16 @@
   // another label or the screen edge, and fades back once the orbits carry them apart. Nothing is ever stacked.
   function drawLabels() {
     var boxes = [];
-    var sunSize = narrow ? 11 : 13, sunY = cy + R * 0.04 + 28, sunSub = 'where all three point';
+    var sunSize = narrow ? 11 : 13, sunY = cy + R * 0.036 + 28, sunSub = 'where all five point';
     boxes.push(labelBox('SUPERINTELLIGENCE', cx, sunY, sunSize, sunSub));
     label('SUPERINTELLIGENCE', cx, sunY, hovered === 'sun' ? 1 : 0.92, 'center', sunSize);
     subLabel(sunSub, cx, sunY + sunSize + 8, 0.55, sunSize + 2);
     var front = bodies.slice().sort(function (a, b) { return (hovered === b) - (hovered === a) || b.z - a.z; });
     front.forEach(function (b) {
-      var text = (narrow ? b.name.split(' ')[0] : b.name).toUpperCase(), size = narrow ? 9 : 10;
+      var text = (narrow ? b.short : b.name).toUpperCase(), size = narrow ? 9 : 10;
       var sub = narrow ? '' : b.role;
       var ly = b.y + b.s + 22, box = labelBox(text, b.x, ly, size, sub);
-      var blocked = clashes(box, boxes) || box.l < 8 || box.r > W - 8;
+      var blocked = clashes(box, boxes) || box.l < 8 || box.r > W - 8 || box.b > H - 8;
       var target = hovered === b ? 1 : (blocked ? 0 : 0.75);
       b.la = reduce ? target : b.la + (target - b.la) * Math.min(1, lastDt * 4);
       if (target > 0) boxes.push(box);
@@ -302,7 +318,7 @@
     if (tip) {
       if (hovered) {
         var name = hovered === 'sun' ? 'Superintelligence' : hovered.name;
-        var status = hovered === 'sun' ? 'Where all three point' : hovered.status;
+        var status = hovered === 'sun' ? 'Where all five point' : hovered.status;
         tip.innerHTML = '<strong></strong><span></span>';
         tip.firstChild.textContent = name; tip.lastChild.textContent = status;
         tip.style.left = Math.min(W - 260, mx + 18) + 'px';

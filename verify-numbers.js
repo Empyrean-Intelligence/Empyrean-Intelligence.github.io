@@ -6,6 +6,12 @@ const allowedNumbers = new Set([
   '0.10', '0.04', '0.17', '42',
   // harness_variance_v1 established: best-of-4 0.608 vs sample-t0.8 0.460, gap 0.148, noise floor 0.088, n=250
   '0.608', '0.460', '0.148', '0.088', '250',
+  // rl_depth_loop_v1 (result_2026_10_18, design, power): N 100/60/180, 60 steps, r=64, 3,840 rollouts, sweep 0.33,
+  // finals 0.15/0.05/0.00/0.65/0.70/0.217/0.156 and their printed intervals; drift 0.000. Derived: 72 = 216/3,
+  // 0.13 = power 0.1274 rounded, 0.22/0.16 = 0.217/0.156 rounded. Dates: 25 (post), 18 (run completed).
+  '100', '60', '180', '15', '64', '3,840', '0.33', '0.13', '0.05', '0.15', '0.00', '0.000', '0.65', '0.70',
+  '0.100', '0.040', '0.170', '0.150', '0.090', '0.220', '0.010', '0.033', '0.117', '0.111', '0.017',
+  '0.167', '0.267', '0.067', '0.217', '0.156', '0.22', '0.16', '72', '84', '25', '18',
   '0.2', '0.1', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12',
   '16', '45', '50', '57', '147', '155', '169', '353', '400', '413', '415', '466', '942',
   '1000', '1,000', '17.9', '15.6', '20.5', '13.8', '10.8', '17.5', '10.3', '6.5', '16.1',
@@ -17,7 +23,9 @@ const files = [
   'index.html',
   'tools/gameability.html',
   'tools/rsi-audit.html',
-  'method.html'
+  'method.html',
+  'research/index.html',
+  'research/correct-signal-teaches.html'
 ];
 
 let totalErrors = 0;
