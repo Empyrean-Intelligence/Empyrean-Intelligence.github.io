@@ -4,28 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Empyrean Intelligence</title>
-  <meta name="description" content="Empyrean Intelligence: machines that learn from experience they can verify, beyond the point where humans can check.">
+  <meta name="description" content="Empyrean Intelligence is building superintelligence: machines that learn from their own experience, beyond the point where humans can check.">
   <!-- Google Fonts: Newsreader (serif), Inter Tight (sans), JetBrains Mono (monospace) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=16">
+  <link rel="stylesheet" href="css/style.css?v=17">
 </head>
 <body>
 
   <!-- Navigation -->
   <header class="site-nav">
     <div class="container nav-inner">
-      <a href="index.html" class="nav-wordmark">
-        Empyrean
-      </a>
+      <a href="index.html" class="nav-wordmark">Empyrean</a>
       <nav aria-label="Main Navigation">
         <ul class="nav-links">
-          <li><a href="#work" class="nav-link">Work</a></li>
           <li><a href="research/index.html" class="nav-link">Research</a></li>
-          <li><a href="method.html" class="nav-link">Method</a></li>
-          <li><a href="#evidence" class="nav-link">Evidence</a></li>
-          <li><a href="#contact" class="nav-link">Contact</a></li>
+          <li><a href="#join" class="nav-link">Join</a></li>
           <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
         </ul>
       </nav>
@@ -34,57 +29,27 @@
 
   <main class="site-main">
     <!-- Hero -->
-    <section class="hero-space" aria-label="Five problems orbiting superintelligence">
+    <section class="hero-space" aria-label="The path to superintelligence">
       <canvas class="orbit-canvas" data-orbit aria-hidden="true"></canvas>
       <div class="orbit-tip" aria-hidden="true" hidden></div>
-      <ul class="orbit-legend orbit-legend-hero" aria-label="The five problems in the orbit">
-        <li><a href="#work-verification"><span class="orbit-dot orbit-dot-verify"></span>Verification <em>the engine</em></a></li>
-        <li><a href="#work-sample"><span class="orbit-dot orbit-dot-sample"></span>Sample efficiency <em>research</em></a></li>
-        <li><a href="#work-continual"><span class="orbit-dot orbit-dot-continual"></span>Continual learning <em>research</em></a></li>
-        <li><a href="#work-experience"><span class="orbit-dot orbit-dot-experience"></span>Experiential learning <em>first run pending</em></a></li>
-        <li><a href="#work-rsi"><span class="orbit-dot orbit-dot-rsi"></span>Recursive self-improvement <em>research</em></a></li>
-      </ul>
     </section>
 
     <!-- Mission -->
     <section id="mission" class="hero mission">
       <div class="container">
         <div class="prose">
-          <span class="eyebrow">The mission</span>
-          <h1 class="hero-mission">Superintelligence may be the most important event since the universe began, and the last invention humanity ever needs to make.</h1>
+          <span class="eyebrow">Empyrean Intelligence</span>
+          <h1 class="hero-mission">The last frontier humanity will build.</h1>
           <p class="hero-position">
-            It should be built by the best minds alive, and built to benefit all of humanity. Empyrean works on the five
-            problems that stand between today's models and that future: experiential learning, continual learning,
-            sample efficiency, recursive self-improvement, and verification.
+            We are building superintelligence: machines that learn from their own experience, keep learning without
+            end, and know when they are right, beyond the point where any human can check.
           </p>
-          <p class="mission-note">
-            Every result we report is pre-registered, run against matched controls, and published with its interval
-            and its limits, including the results that come out negative.
+          <p class="hero-position">
+            It may be the most important thing our species ever does. It should be built by the best minds alive, for
+            all of humanity. That is the only thing we work on.
           </p>
           <p class="mission-cta">
-            <a href="#contact">If you care about humanity above all else, join us &rarr;</a>
-          </p>
-        </div>
-        <div class="prose try-it">
-          <span class="eyebrow">Try it in two minutes</span>
-          <p class="try-it-lede">
-            Our verifier on a public benchmark, on a laptop, with no model and no API key. On MBPP it finds that
-            17.9% of problems accept a solution we can show is broken.
-          </p>
-          <div class="terminal-block">
-            <div class="terminal-content">
-              <span class="prompt-symbol">$</span>
-              <span>pip install "gameability[hf]" &amp;&amp; gameability check mbpp</span>
-            </div>
-            <button type="button" class="copy-btn" data-clipboard-text="pip install &quot;gameability[hf]&quot; &amp;&amp; gameability check mbpp">COPY</button>
-          </div>
-          <pre class="terminal-output" aria-label="Example output">  415 -- 6 of 11 broken solutions pass every visible test
-      -    if arr_len &lt; 2:
-      +    if arr_len &lt;= 2:
-      a test that catches it: assert max_Product([4, 9]) == (4, 9)</pre>
-          <p class="try-it-links">
-            <a href="tools/gameability.html">How it works &rarr;</a> &middot;
-            <a href="research/record.html">Every result, including the nulls &rarr;</a>
+            <a href="#join">If you care about humanity above all else, join us &rarr;</a>
           </p>
         </div>
       </div>
@@ -92,275 +57,18 @@
 
     <hr class="section-rule">
 
-    <!-- How the five fit -->
-    <section id="map" class="container">
+    <!-- Join -->
+    <section id="join" class="container join">
       <div class="prose">
-        <span class="eyebrow">How the five fit</span>
-        <h2>What brings what</h2>
+        <span class="eyebrow">Join</span>
+        <h2>A small team for the largest problem</h2>
         <p>
-          None of the five works alone. Each arrow is a dependency: the problem at its tail supplies something the
-          problem at its head cannot get any other way.
-        </p>
-      </div>
-      <figure class="fit-map">
-        <svg class="fit-map-svg" viewBox="0 0 760 620" role="img" aria-labelledby="fit-map-title fit-map-desc">
-          <title id="fit-map-title">How the five problems lead to superintelligence</title>
-          <desc id="fit-map-desc">Verification and sample efficiency feed experiential learning; experiential learning
-            feeds continual learning; continual learning feeds recursive self-improvement, which verification also
-            gates; recursive self-improvement leads to superintelligence.</desc>
-          <defs>
-            <marker id="fit-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-              <path d="M0 0 L10 5 L0 10 z" class="fit-arrowhead"></path>
-            </marker>
-          </defs>
-
-          <path class="fit-edge" d="M380 130 L380 90" marker-end="url(#fit-arrow)"></path>
-          <path class="fit-edge" d="M380 250 L380 196" marker-end="url(#fit-arrow)"></path>
-          <path class="fit-edge" d="M380 370 L380 316" marker-end="url(#fit-arrow)"></path>
-          <path class="fit-edge" d="M170 510 C170 470, 300 470, 320 438" marker-end="url(#fit-arrow)"></path>
-          <path class="fit-edge" d="M590 510 C590 470, 460 470, 440 438" marker-end="url(#fit-arrow)"></path>
-          <path class="fit-edge fit-edge-gate" d="M70 510 C40 360, 120 180, 246 162" marker-end="url(#fit-arrow)"></path>
-          <text class="fit-edge-label" x="58" y="330" transform="rotate(-78 58 330)">gates every self-update</text>
-
-          <g class="fit-node fit-node-goal">
-            <rect x="230" y="20" width="300" height="70" rx="35"></rect>
-            <text class="fit-name" x="380" y="52" text-anchor="middle">Superintelligence</text>
-            <text class="fit-brings" x="380" y="72" text-anchor="middle">where all five point</text>
-          </g>
-          <g class="fit-node">
-            <rect x="250" y="130" width="260" height="66" rx="4"></rect>
-            <circle class="fit-dot fit-dot-rsi" cx="272" cy="156" r="5"></circle>
-            <text class="fit-name" x="286" y="161">Recursive self-improvement</text>
-            <text class="fit-brings" x="272" y="182">brings: a learner that improves the loop</text>
-          </g>
-          <g class="fit-node">
-            <rect x="250" y="250" width="260" height="66" rx="4"></rect>
-            <circle class="fit-dot fit-dot-continual" cx="272" cy="276" r="5"></circle>
-            <text class="fit-name" x="286" y="281">Continual learning</text>
-            <text class="fit-brings" x="272" y="302">brings: gains that add up, not overwrite</text>
-          </g>
-          <g class="fit-node">
-            <rect x="250" y="370" width="260" height="66" rx="4"></rect>
-            <circle class="fit-dot fit-dot-experience" cx="272" cy="396" r="5"></circle>
-            <text class="fit-name" x="286" y="401">Experiential learning</text>
-            <text class="fit-brings" x="272" y="422">brings: new data past where human data ends</text>
-          </g>
-          <g class="fit-node">
-            <rect x="40" y="510" width="260" height="66" rx="4"></rect>
-            <circle class="fit-dot fit-dot-verify" cx="62" cy="536" r="5"></circle>
-            <text class="fit-name" x="76" y="541">Verification</text>
-            <text class="fit-brings" x="62" y="562">brings: a signal that cannot be gamed</text>
-          </g>
-          <g class="fit-node">
-            <rect x="460" y="510" width="260" height="66" rx="4"></rect>
-            <circle class="fit-dot fit-dot-sample" cx="482" cy="536" r="5"></circle>
-            <text class="fit-name" x="496" y="541">Sample efficiency</text>
-            <text class="fit-brings" x="482" y="562">brings: more learned per checked attempt</text>
-          </g>
-        </svg>
-        <ol class="fit-map-list" aria-label="What each problem brings">
-          <li><strong>Verification</strong> brings a signal that cannot be gamed. It feeds experiential learning and gates every self-update.</li>
-          <li><strong>Sample efficiency</strong> brings more learned per checked attempt. It makes experiential learning affordable.</li>
-          <li><strong>Experiential learning</strong> brings new data past where human data ends. It feeds continual learning.</li>
-          <li><strong>Continual learning</strong> brings gains that add up instead of overwriting each other. It feeds recursive self-improvement.</li>
-          <li><strong>Recursive self-improvement</strong> brings a learner that improves the loop itself. It is the road to superintelligence.</li>
-        </ol>
-      </figure>
-    </section>
-
-    <hr class="section-rule">
-
-    <!-- The work: five problems -->
-    <section id="work" class="container">
-      <div class="prose">
-        <span class="eyebrow">The Work</span>
-        <h2>Five problems, one engine</h2>
-        <p>
-          Verification is the engine of the other four: a model can only teach itself, keep what it learned, or
-          improve its own learning if the signal it learns from cannot be fooled.
-        </p>
-
-        <div class="problems-list">
-          <div class="problem-row" id="work-verification">
-            <span class="problem-name">Verification</span>
-            <span class="problem-status-shipped">Shipped work</span>
-          </div>
-          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
-            Machines that check what humans cannot. We measure how often today's checks are fooled, in benchmarks,
-            RL environments and self-improvement claims, with an independent oracle, and we build the checks that are
-            not.
-          </p>
-
-          <div class="problem-row" id="work-experience">
-            <span class="problem-name">Experiential learning</span>
-            <span class="problem-status-research">Built &middot; first run pending</span>
-          </div>
-          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
-            A small model trains only on its own attempts, each checked exactly, on program-induction tasks whose
-            difficulty has no ceiling. It chooses its own level, and it is compared against the same recipe with
-            coin-flip reward, a fixed curriculum, and a frozen copy. The claim we test is the slope, levels climbed per
-            unit of experience, not a gap to any one model.
-          </p>
-
-          <div class="problem-row" id="work-continual">
-            <span class="problem-name">Continual learning</span>
-            <span class="problem-status-research">Research</span>
-          </div>
-          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
-            Weights that keep changing with every verified experience, without forgetting what came before. The
-            verifier decides which experiences are safe to keep. Three studies so far, none positive: a forgetting
-            effect we predicted came out in the opposite direction; a per-item learning cap was uninformative under
-            its own pre-set rule; and an agent reflecting on feedback with frozen weights did not clear the bar we set
-            for learning.
-          </p>
-
-          <div class="problem-row" id="work-sample">
-            <span class="problem-name">Sample efficiency</span>
-            <span class="problem-status-research">Research</span>
-          </div>
-          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
-            How much does one checked attempt teach? In our reinforcement-learning run, 60 training steps moved
-            depth-4 accuracy from 5 in 100 to 15 in 100. Every run we register now reports its gain per verified
-            attempt, so efficiency becomes a measured curve rather than a claim.
-          </p>
-
-          <div class="problem-row" id="work-rsi">
-            <span class="problem-name">Recursive self-improvement</span>
-            <span class="problem-status-research">Research</span>
-          </div>
-          <p style="font-size: 0.9375rem; margin: var(--space-1) 0 var(--space-3);">
-            A model that improves the process that improves it. In small controlled loops, the learner improved when
-            its problems and its checking came from outside it; at 1.5B, fine-tuning on its own verified successes
-            produced no measurable gain. The closed reinforcement-learning loop is registered next, against a matched
-            control.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-rule">
-
-    <!-- Evidence -->
-    <section id="evidence" class="container">
-      <div class="prose">
-        <span class="eyebrow">Evidence So Far</span>
-        <h2>What is measured</h2>
-        <p>
-          <strong>Correct signal teaches; random signal does not.</strong> In our own reinforcement-learning run on a
-          1.5B model, reward from a code-running checker raised depth-4 composition accuracy by <strong>+0.10</strong>
-          (95% interval [+0.04, +0.17]) over a frozen copy, while an otherwise identical run with coin-flip reward did
-          not improve. It did not transfer to an outside math benchmark, and we report that too.
-          <a href="research/correct-signal-teaches.html">Read the full write-up &rarr;</a>
+          We are looking for a few people who want to spend the next decade on this: researchers and engineers who
+          would rather build the frontier than read about it.
         </p>
         <p>
-          <strong>Benchmarks accept broken solutions.</strong> Our open tool <code>gameability</code> finds that
-          <strong>17.9%</strong> of MBPP problems (169 of 942) and <strong>10.3%</strong> of HumanEval problems
-          (16 of 155) accept a deliberately broken solution; <strong>95.2%</strong> and <strong>84.6%</strong> of
-          those flags are confirmed by EvalPlus's independent tests.
-        </p>
-        <p>
-          <strong>The harness moves the score.</strong> The same checkpoint, on the same 250 problems, scored
-          <strong>0.608</strong> under one evaluation scaffold and <strong>0.460</strong> under another, both choices a
-          competent team could defend: a <strong>0.148</strong> gap, against a 0.088 noise floor, with identical
-          weights. A benchmark number reported without its harness cannot be read to better than that.
-        </p>
-        <p>
-          <strong>Vendors' verifiers, audited.</strong> We read the public reward and scoring code of the 42
-          companies that sell RL environments to frontier labs, against a checklist fixed before reading, and
-          confirmed each flag by running the vendor's own code. Results are published here after every affected vendor
-          has been told privately and had the chance to reply.
-        </p>
-      </div>
-    </section>
-
-    <hr class="section-rule">
-
-    <!-- Instruments -->
-    <section id="tools" class="container">
-      <div class="prose">
-        <span class="eyebrow">Open Instruments // MIT License // Python</span>
-        <h2>Tools anyone can run</h2>
-        <p>
-          <code>gameability</code> finds the problems in a code benchmark that accept broken solutions. It breaks each
-          problem's reference solution in one small place, confirms the result is really wrong, then checks whether the
-          problem's own tests notice. Runs on a laptop, no model or API key.
-          <a href="tools/gameability.html">Scoreboard &amp; documentation &rarr;</a>
-        </p>
-      </div>
-      <div style="max-width: 68ch; margin-top: var(--space-2); margin-bottom: var(--space-3);">
-        <div class="terminal-block">
-          <div class="terminal-content">
-            <span class="prompt-symbol">$</span>
-            <span>pip install "gameability[hf]" &amp;&amp; gameability check mbpp</span>
-          </div>
-          <button type="button" class="copy-btn" data-clipboard-text="pip install &quot;gameability[hf]&quot; &amp;&amp; gameability check mbpp">COPY</button>
-        </div>
-      </div>
-      <div class="prose">
-        <p>
-          <code>rsi-audit</code> checks a self-improvement or agent-leaderboard claim from its public artefacts:
-          whether the ranking survives resampling, whether the agent could see the grader, whether the reported system
-          was picked on the graded tasks, how many record claims could pass by chance, and the 12 requirements a
-          self-improvement number needs. <a href="tools/rsi-audit.html">The five checks &amp; documentation &rarr;</a>
-        </p>
-      </div>
-      <div style="max-width: 68ch; margin-top: var(--space-2);">
-        <div class="terminal-block">
-          <div class="terminal-content">
-            <span class="prompt-symbol">$</span>
-            <span>pip install rsi-audit</span>
-          </div>
-          <button type="button" class="copy-btn" data-clipboard-text="pip install rsi-audit">COPY</button>
-        </div>
-      </div>
-    </section>
-
-    <hr class="section-rule">
-
-    <!-- Principles -->
-    <section class="container">
-      <div class="prose">
-        <span class="eyebrow">Principles</span>
-        <h2>How we work</h2>
-        <p style="font-size: 1rem; line-height: 1.6; margin-bottom: var(--space-2);">
-          Every experiment's decision rule is written before the code that runs it.<br>
-          Every claim of improvement is made against a matched control.<br>
-          Every number ships with its interval and its limits.<br>
-          Claims about others' work go to the authors privately first.<br>
-          Negative results are published too.
-        </p>
-        <p style="font-size: 0.875rem;">
-          <a href="method.html">Read our method and standards in detail &rarr;</a>
-        </p>
-      </div>
-    </section>
-
-    <hr class="section-rule">
-
-    <!-- Contact -->
-    <section id="contact" class="container">
-      <div class="prose">
-        <span class="eyebrow">Contact &amp; Source</span>
-        <h2>Contact</h2>
-        <p style="font-size: 1rem; margin-bottom: var(--space-2);">
-          Email: <a href="mailto:hi@empyreanintelligence.com">hi@empyreanintelligence.com</a>
-        </p>
-        <p style="font-size: 0.9375rem; margin-bottom: var(--space-2);">
-          To join: write to us with the problem you would want to own and one piece of work you are proud of.
-          To critique a result: reply to any write-up, or email us. We would rather hear where we are wrong.
-        </p>
-        <p style="font-size: 0.9375rem; margin-bottom: var(--space-2);">
-          Source: <a href="https://github.com/Empyrean-Intelligence/gameability">gameability</a> &middot;
-          <a href="https://github.com/Empyrean-Intelligence/rsi-audit">rsi-audit</a>
-        </p>
-        <p style="font-size: 0.9375rem; margin-bottom: var(--space-2);">
-          Packages: <a href="https://pypi.org/project/gameability/">PyPI: gameability</a> &middot;
-          <a href="https://pypi.org/project/rsi-audit/">PyPI: rsi-audit</a>
-        </p>
-        <p style="font-size: 0.9375rem;">
-          Reach us: <a href="https://github.com/Empyrean-Intelligence">github.com/Empyrean-Intelligence</a> &middot;
-          <a href="https://x.com/Empyrean_Intel">X</a> &middot;
-          <a href="https://www.linkedin.com/company/empyrean-intelligence/">LinkedIn</a>
+          Write to <a href="mailto:hi@empyreanintelligence.com">hi@empyreanintelligence.com</a> with the problem you
+          would want to own.
         </p>
       </div>
     </section>
@@ -369,16 +77,18 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <div>
-        <span class="mono">Empyrean Intelligence</span> &mdash; Machines that learn from experience they can verify
-      </div>
-      <div>
-        Pre-registered. Controlled. Published with limits.
+      <div><span class="mono">Empyrean Intelligence</span></div>
+      <div class="footer-links">
+        <a href="research/index.html">Research</a> &middot;
+        <a href="tools/gameability.html">Tools</a> &middot;
+        <a href="https://x.com/Empyrean_Intel">X</a> &middot;
+        <a href="https://github.com/Empyrean-Intelligence">GitHub</a> &middot;
+        <a href="mailto:hi@empyreanintelligence.com">hi@empyreanintelligence.com</a>
       </div>
     </div>
   </footer>
 
   <script src="js/main.js"></script>
-  <script src="js/orbit.js?v=13"></script>
+  <script src="js/orbit.js?v=14"></script>
 </body>
 </html>

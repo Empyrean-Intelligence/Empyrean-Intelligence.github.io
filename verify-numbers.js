@@ -39,10 +39,8 @@ const files = [
   'index.html',
   'tools/gameability.html',
   'tools/rsi-audit.html',
-  'method.html',
   'research/index.html',
-  'research/correct-signal-teaches.html',
-  'research/record.html'
+  'research/correct-signal-teaches.html'
 ];
 
 let totalErrors = 0;

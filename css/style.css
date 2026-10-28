@@ -1321,6 +1321,28 @@ a:focus-visible, button:focus-visible {
   gap: var(--space-2);
 }
 
+.footer-links a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
+  color: var(--ink, currentColor);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Join section: generous space, one statement */
+.join {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-10);
+}
+
+.join h2 {
+  text-wrap: balance;
+}
+
 @media (min-width: 640px) {
   .footer-inner {
     flex-direction: row;

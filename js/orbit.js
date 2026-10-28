@@ -337,7 +337,7 @@
   });
   hero.addEventListener('click', function (e) {
     if (!hovered || e.target.closest('a, button')) return;
-    var target = document.getElementById('work');
+    var target = document.getElementById('mission');
     if (target) target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
   });
 
