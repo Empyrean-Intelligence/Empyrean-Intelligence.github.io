@@ -249,18 +249,36 @@
     boxes.push(labelBox('SUPERINTELLIGENCE', cx, sunY, sunSize, sunSub));
     label('SUPERINTELLIGENCE', cx, sunY, hovered === 'sun' ? 1 : 0.92, 'center', sunSize);
     subLabel(sunSub, cx, sunY + sunSize + 8, 0.55, sunSize + 2);
-    var front = bodies.slice().sort(function (a, b) { return (hovered === b) - (hovered === a) || b.z - a.z; });
+    // Verification is placed first: it orbits next to the sun's name and is the one label that must not vanish.
+    var front = bodies.slice().sort(function (a, b) {
+      return (hovered === b) - (hovered === a) || (b.key === 'verify') - (a.key === 'verify') || b.z - a.z;
+    });
     front.forEach(function (b) {
       var text = (narrow ? b.short : b.name).toUpperCase(), size = narrow ? 9 : 10;
       var sub = narrow ? '' : b.role;
-      var ly = b.y + b.s + 22, box = labelBox(text, b.x, ly, size, sub);
-      var blocked = clashes(box, boxes) || box.l < 8 || box.r > W - 8 || box.b > H - 8;
+      var extra = sub ? size + 12 : 0, probe = labelBox(text, b.x, 0, size, sub), half = (probe.r - probe.l) / 2;
+      var spots = [
+        { x: b.x, y: b.y + b.s + 22 },                    // below, the usual place
+        { x: b.x, y: b.y - b.s - 14 - extra },            // above
+        { x: b.x + half + b.s + 6, y: b.y + 4 },          // right
+        { x: b.x - half - b.s - 6, y: b.y + 4 }           // left
+      ];
+      var free = function (s) {
+        var c = labelBox(text, s.x, s.y, size, sub);
+        return !(clashes(c, boxes) || c.l < 8 || c.r > W - 8 || c.t < 8 || c.b > H - 8);
+      };
+      // keep the current side while it stays clear, so a label does not hop between sides
+      var pick = b.spot !== undefined && free(spots[b.spot]) ? b.spot : -1;
+      for (var i = 0; pick < 0 && i < spots.length; i++) if (free(spots[i])) pick = i;
+      var blocked = pick < 0;
+      if (!blocked) b.spot = pick;
+      var at = spots[blocked ? (b.spot || 0) : pick], box = labelBox(text, at.x, at.y, size, sub);
       var target = hovered === b ? 1 : (blocked ? 0 : 0.75);
       b.la = reduce ? target : b.la + (target - b.la) * Math.min(1, lastDt * 4);
       if (target > 0) boxes.push(box);
       if (b.la > 0.02) {
-        label(text, b.x, ly, b.la.toFixed(3), 'center', size);
-        if (sub) subLabel(sub, b.x, ly + size + 7, (b.la * 0.7).toFixed(3), size + 3);
+        label(text, at.x, at.y, b.la.toFixed(3), 'center', size);
+        if (sub) subLabel(sub, at.x, at.y + size + 7, (b.la * 0.7).toFixed(3), size + 3);
       }
     });
     if (!narrow) {

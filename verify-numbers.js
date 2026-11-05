@@ -32,7 +32,11 @@ const allowedNumbers = new Set([
   // self_composed_frontier_v1/v2; escalation_v2 (30 generations); plasticity_control_v1; referee_calibration_v1 AUROC
   '0.530', '0.385', '0.020', '0.124', '0.093', '30', '6.33', '0.6',
   // externalisation_at_scale_v1 pilot; bet2 / continual_per_item_cap drop shares; census_contract_check_v1
-  '0.007', '0.047', '92.8', '7.9', '85.7', '78.6'
+  '0.007', '0.047', '92.8', '7.9', '85.7', '78.6',
+  // second coin-flip run, different task set: GSM8K 0.678 (outreach/scoreboard disclosure)
+  // rsigym_audit_v1 result_2026_10_13, research/rsigym-graded-sets.html; 2022-23 = AIME years, 93 = commit prefix
+  '0.678', '0.9778', '0.3167', '0.917', '0.950', '0.983', '0.5333', '0.1767', '0.344', '0.614', '17', '30', '13',
+  '2022', '23', '2610.10310', '93',
 ]);
 
 const files = [
@@ -40,7 +44,8 @@ const files = [
   'tools/gameability.html',
   'tools/rsi-audit.html',
   'research/index.html',
-  'research/correct-signal-teaches.html'
+  'research/correct-signal-teaches.html',
+  'research/rsigym-graded-sets.html'
 ];
 
 let totalErrors = 0;

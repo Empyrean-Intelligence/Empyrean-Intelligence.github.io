@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RSIGym's Graded Sets — Empyrean Intelligence</title>
+  <meta name="description" content="In the 42 trajectories released with RSIGym, agents ran development jobs on the datasets they were later graded on. We measured that it happened, not how much it raised any score.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=17">
+</head>
+<body>
+
+  <header class="site-nav">
+    <div class="container nav-inner">
+      <a href="../index.html" class="nav-wordmark">Empyrean</a>
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="../research/index.html" class="nav-link active">Research</a></li>
+          <li><a href="../index.html#join" class="nav-link">Join</a></li>
+          <li><button type="button" class="theme-toggle" aria-label="Toggle theme">DARK</button></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <article class="container post">
+      <header class="prose post-head">
+        <span class="eyebrow">Audit &middot; Verification &middot; 5 November 2026</span>
+        <h1 class="post-title">RSIGym's agents developed on the sets they were graded on</h1>
+        <p class="post-dek">
+          We read the 42 trajectories released with RSIGym. Agents ran development jobs on the same datasets they were
+          later graded on, compared candidates there, and submitted the best. We did not measure how much this raised
+          any score.
+        </p>
+      </header>
+      <div class="prose">
+        <h2>What we read</h2>
+        <p>RSIGym ranks self-improving agents (<a href="https://arxiv.org/abs/2610.10310">arXiv 2610.10310</a>). On
+        13 October 2026 we read the 42 trajectories in its three released zips, at code commit 93ee612. We re-ran
+        nothing. Every score below is a number reported in those files.</p>
+
+        <h2>What we found</h2>
+        <ul>
+          <li>Every one of the 17 Claude Code joint runs posted development jobs naming its benchmark's graded dataset,
+          for example <code>aime_2024_2025</code> and <code>swe_bench_verified_seed23_sample100</code>.</li>
+          <li>Job configurations echoed by the benchmark server show graded-set development jobs in 18 joint runs,
+          including Codex runs. This route only sees jobs whose detail the agent fetched, so it undercounts. The two
+          routes disagree on counts. We list both and have not resolved that.</li>
+          <li>AIME winner (Opus 5, official score 0.9778, baseline 0.3167): its final report lists three candidates
+          scored on <code>aime_2024_2025</code>, at 0.917, 0.950 and 0.983, and it submitted the highest. It also used
+          AIME 2022-23 as a separate development set for design.</li>
+          <li>SWE-bench winner (DeepSeek V4.1 Flash, official score 0.5333, baseline 0.1767): it compared a base model
+          and a fine-tuned model on 30 of the 100 graded tasks, at 0.344 and 0.614, and submitted the higher.</li>
+        </ul>
+
+        <h2>What this does not show</h2>
+        <p>Choosing the best of several candidates on the graded set biases a reported score upward, by an amount that
+        depends on how many candidates were compared and how far they spread. We measured that this happened, not how
+        much of any gain it explains. We did not evaluate how widespread it is across the leaderboard, and we say
+        nothing about anyone's intent. Re-scoring the submitted systems on held-out tasks would settle it.</p>
+
+        <h2>Disclosure</h2>
+        <p>We told the corresponding authors privately by email on 1 November 2026 and promised nothing would be
+        published before 5 November. They had not replied when this page went up. We will share the script and the
+        exact transcript lines on request, and we will correct this page if a reply changes anything here.</p>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><span class="mono">Empyrean Intelligence</span> &mdash; Machines that learn from experience they can verify</div>
+      <div>Pre-registered. Controlled. Published with limits.</div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
