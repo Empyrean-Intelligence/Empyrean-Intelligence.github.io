@@ -1350,3 +1350,62 @@ a:focus-visible, button:focus-visible {
     align-items: baseline;
   }
 }
+
+/* Destination: the second deep-space band. Like the hero it is one world in both themes, so every color is explicit. */
+.destination-space {
+  position: relative;
+  min-height: 72vh;
+  min-height: 72svh;
+  overflow: hidden;
+  background: #07090C;
+  color: #E9E6DF;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rocket-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* the edges fall away into space; the bottom darkens so the statement reads over the stars */
+.destination-space::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 60% 45%, rgba(7, 9, 12, 0) 50%, rgba(7, 9, 12, 0.7) 100%),
+    linear-gradient(to top, rgba(7, 9, 12, 0.92) 0%, rgba(7, 9, 12, 0) 45%);
+}
+
+.destination-copy {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-8);
+}
+
+.destination-copy .eyebrow {
+  color: #8F949B;
+}
+
+.destination-copy h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.2;
+  max-width: 22ch;
+  color: #E9E6DF;
+  text-wrap: balance;
+  margin: 0;
+}
+
+@media (min-width: 720px) {
+  .destination-copy h2 {
+    font-size: 2.5rem;
+  }
+}
