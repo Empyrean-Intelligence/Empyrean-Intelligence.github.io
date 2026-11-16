@@ -37,6 +37,11 @@ const allowedNumbers = new Set([
   // rsigym_audit_v1 result_2026_10_13, research/rsigym-graded-sets.html; 2022-23 = AIME years, 93 = commit prefix
   '0.678', '0.9778', '0.3167', '0.917', '0.950', '0.983', '0.5333', '0.1767', '0.344', '0.614', '17', '30', '13',
   '2022', '23', '2610.10310', '93',
+  // homepage 2026-11-16 (user-approved text): experience_frontier_free_t4_v1 result_2026_11_09 -- seed 0 gen-0 15 ->
+  // experience 44 of 280 (ladder 1.100 = d1 .50 d2 .28 d3 .20 d4 .07 d6 .05 x 40 per depth), random_paced 0;
+  // experience_frontier_free_t4_seed1_v1 result_2026_11_10 -- seed 1 pass 20 -> 37; proposer_solver_externalisation_v2
+  // run A frontier mean d5-d6: ext_ext 0.6175 -> 0.82, int_int final 0.265 (rounded 0.62 / 0.82 / 0.27)
+  '280', '20', '37', '0.62', '0.82', '0.27',
 ]);
 
 const files = [
