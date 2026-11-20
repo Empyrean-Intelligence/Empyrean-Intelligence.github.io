@@ -375,9 +375,20 @@ a:focus-visible, button:focus-visible {
   color: #8F949B;
 }
 
-/* Mission: the statement, on the page's own ground, directly under the orbit */
+/* Mission: the first section on the page since 2026-11-20 -- the statement, the climb, then the paragraph */
 .mission {
-  padding-top: var(--space-10);
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+}
+
+/* the climb sits directly under the headline, so it needs less air above it than it did under a paragraph */
+.mission .hero-mission + .climb {
+  margin-top: var(--space-4);
+}
+
+/* What we have achieved: its own section, after the destination band */
+.achieved {
+  padding-top: var(--space-8);
   padding-bottom: var(--space-6);
 }
 
@@ -1443,8 +1454,16 @@ a:focus-visible, button:focus-visible {
   display: block;
   width: 100%;
   height: auto;
+  max-height: 44vh;   /* first screen: on short laptop screens the button stays above the fold; the drawing scales, centred */
   margin-top: var(--space-2);
   overflow: visible;
+}
+
+/* short screens (768 px laptops): the payoff line must land above the fold too */
+@media (max-height: 720px) {
+  .climb-svg {
+    max-height: 34vh;
+  }
 }
 
 .climb-grid {

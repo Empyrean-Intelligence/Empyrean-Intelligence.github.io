@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=19">
+  <link rel="stylesheet" href="css/style.css?v=20">
 </head>
 <body>
 
@@ -28,23 +28,12 @@
   </header>
 
   <main class="site-main">
-    <!-- Hero -->
-    <section class="hero-space" aria-label="The path to superintelligence">
-      <canvas class="orbit-canvas" data-orbit aria-hidden="true"></canvas>
-      <div class="orbit-tip" aria-hidden="true" hidden></div>
-    </section>
-
-    <!-- Mission -->
+    <!-- Mission: the statement and the self-taught climb are the first thing a visitor sees (user, 2026-11-20) -->
     <section id="mission" class="hero mission">
       <div class="container">
         <div class="prose">
           <span class="eyebrow">Empyrean Intelligence</span>
           <h1 class="hero-mission">We are building superintelligence.</h1>
-          <p class="hero-position">
-            A mind that learns from its own experience, sets its own problems, checks its own answers, and keeps
-            improving past the point where any human can follow. It may be the most important thing our species ever
-            builds. It should be built for all of humanity.
-          </p>
 
           <!-- The self-taught climb, press to run: experience_frontier_free_t4_v1 (seed 0) 15 -> 44 of 280; coin-flip 0 -->
           <figure class="climb" data-climb>
@@ -83,6 +72,28 @@
             <p class="climb-line" data-climb-line>It taught itself.</p>
           </figure>
 
+          <p class="hero-position">
+            A mind that learns from its own experience, sets its own problems, checks its own answers, and keeps
+            improving past the point where any human can follow. It may be the most important thing our species ever
+            builds. It should be built for all of humanity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destination: a rocket climbing past one ceiling after another (second screen since 2026-11-20) -->
+    <section id="destination" class="destination-space" aria-labelledby="destination-title">
+      <canvas class="rocket-canvas" data-rocket aria-hidden="true"></canvas>
+      <div class="container destination-copy">
+        <span class="eyebrow">Destination</span>
+        <h2 id="destination-title">A machine that keeps teaching itself past its own starting ceiling, with no human data.</h2>
+      </div>
+    </section>
+
+    <!-- What we have achieved -->
+    <section id="achieved" class="achieved">
+      <div class="container">
+        <div class="prose">
           <h2>What we have achieved</h2>
 
           <h3>A model taught itself.</h3>
@@ -117,13 +128,10 @@
       </div>
     </section>
 
-    <!-- Destination: a rocket climbing past one ceiling after another -->
-    <section id="destination" class="destination-space" aria-labelledby="destination-title">
-      <canvas class="rocket-canvas" data-rocket aria-hidden="true"></canvas>
-      <div class="container destination-copy">
-        <span class="eyebrow">Destination</span>
-        <h2 id="destination-title">A machine that keeps teaching itself past its own starting ceiling, with no human data.</h2>
-      </div>
+    <!-- The path: the orbit, last before Join (user, 2026-11-20) -->
+    <section class="hero-space" aria-label="The path to superintelligence">
+      <canvas class="orbit-canvas" data-orbit aria-hidden="true"></canvas>
+      <div class="orbit-tip" aria-hidden="true" hidden></div>
     </section>
 
     <hr class="section-rule">
