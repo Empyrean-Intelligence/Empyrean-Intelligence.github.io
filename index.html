@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=20">
+  <link rel="stylesheet" href="css/style.css?v=21">
 </head>
 <body>
 
@@ -96,30 +96,30 @@
         <div class="prose">
           <h2>What we have achieved</h2>
 
-          <h3>A model taught itself.</h3>
-          <p class="hero-position">
-            From nothing but its own attempts, checked exactly, it rose from 15 to 44 of 280 problems it had never
-            seen. A second run did it again (20 to 37). The same training with a coin-flip reward fell to 0.
-            <br><em>The ambitious version:</em> a machine that keeps teaching itself past its own starting ceiling,
-            with no human data.
-          </p>
+          <!-- Short headlines, one proof line each (user-approved text, 2026-11-20). Sources: experience_frontier_free_t4_v1
+               and its seed-1 replicate; rl_depth_loop_v1 depth-4 skill, account A; proposer_solver_externalisation_v2 run A -->
+          <div class="result">
+            <h3>It taught itself: 15 &rarr; 44.</h3>
+            <p class="result-proof">Of 280 problems it had never seen, from its own checked attempts. With a coin-flip reward
+              instead: 0. A second run: 20 &rarr; 37.</p>
+            <p class="result-ambition"><em>The ambitious version:</em> a machine that keeps teaching itself past its own
+              starting ceiling, with no human data.</p>
+          </div>
 
-          <h3>The reward decides what it learns.</h3>
-          <p class="hero-position">
-            Same model, same training, only the reward changed. A correct checker taught it a new skill (5/100 to
-            15/100). A coin-flip reward broke it (GSM8K fell from 0.70 to 0.22; a second run on different tasks stayed
-            near its start, 0.678).
-            <br><em>The ambitious version:</em> rewards a self-improving system cannot fool, the safety valve on every
-            loop that improves itself.
-          </p>
+          <div class="result">
+            <h3>The reward decides what it learns.</h3>
+            <p class="result-proof">Same training, only the reward changed: a correct checker took a skill from 5 to 15 of 100;
+              a coin-flip reward took it to 0.</p>
+            <p class="result-ambition"><em>The ambitious version:</em> rewards a self-improving system cannot fool.</p>
+          </div>
 
-          <h3>We found where self-teaching breaks.</h3>
-          <p class="hero-position">
-            A learning loop fed problems and checks from outside climbed from 0.62 to 0.82. When the model set and
-            graded its own, it fell to 0.27.
-            <br><em>The ambitious version:</em> the first loop that poses its own problems and does not collapse. That
-            is the self-improvement loop, closed.
-          </p>
+          <div class="result">
+            <h3>Self-teaching breaks on its own problems.</h3>
+            <p class="result-proof">Starting at 0.62: problems from outside took it to 0.82; its own problems, every answer
+              checked, to 0.35; its own, graded by itself, to 0.27.</p>
+            <p class="result-ambition"><em>The ambitious version:</em> the first loop that poses its own problems and keeps
+              climbing. That is the self-improvement loop, closed.</p>
+          </div>
 
           <p class="mission-cta">
             <a href="#join">If you care about humanity above all else, join us &rarr;</a>

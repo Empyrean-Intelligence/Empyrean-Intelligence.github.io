@@ -42,6 +42,9 @@ const allowedNumbers = new Set([
   // experience_frontier_free_t4_seed1_v1 result_2026_11_10 -- seed 1 pass 20 -> 37; proposer_solver_externalisation_v2
   // run A frontier mean d5-d6: ext_ext 0.6175 -> 0.82, int_int final 0.265 (rounded 0.62 / 0.82 / 0.27)
   '280', '20', '37', '0.62', '0.82', '0.27',
+  // homepage 2026-11-20 (user-approved short headlines): proposer_solver_externalisation_v2 run A int_ext final
+  // 0.3458 -- the model proposes, execution verifies (contamination 0.001) -- rounded 0.35
+  '0.35',
 ]);
 
 const files = [

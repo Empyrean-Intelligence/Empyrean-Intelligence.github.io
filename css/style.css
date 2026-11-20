@@ -392,6 +392,39 @@ a:focus-visible, button:focus-visible {
   padding-bottom: var(--space-6);
 }
 
+/* each result: a short headline, one small proof line, one ambitious line (user, 2026-11-20) */
+.achieved h2 + .result {
+  margin-top: var(--space-3);
+}
+
+.result + .result {
+  margin-top: var(--space-5);
+}
+
+.result h3 {
+  margin-bottom: var(--space-1);
+  text-wrap: balance;
+}
+
+.result-proof {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0 0 var(--space-1);
+}
+
+.result-ambition {
+  font-size: 1.0625rem;
+  line-height: 1.55;
+  color: var(--ink);
+  margin: 0;
+}
+
+.achieved .mission-cta {
+  margin-top: var(--space-6);
+}
+
 .mission .hero-mission {
   font-size: 1.75rem;
   line-height: 1.2;
