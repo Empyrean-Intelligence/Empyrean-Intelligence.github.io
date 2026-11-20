@@ -1409,3 +1409,188 @@ a:focus-visible, button:focus-visible {
     font-size: 2.5rem;
   }
 }
+
+/* ==========================================================================
+   The self-taught climb: press to run (homepage). Without JS the final chart
+   shows; with JS it starts at "before" and draws the climb on press.
+   ========================================================================== */
+.climb {
+  margin: var(--space-6) 0 var(--space-6);
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  border: 1px solid var(--rule);
+  background: var(--surface-subtle);
+}
+
+.climb-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-2);
+}
+
+.climb-head .eyebrow {
+  margin: 0;
+}
+
+.climb-start {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.climb-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: var(--space-2);
+  overflow: visible;
+}
+
+.climb-grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+  stroke-dasharray: 2 5;
+}
+
+.climb-axis {
+  stroke: var(--rule);
+  stroke-width: 1.5;
+}
+
+.climb-tick,
+.climb-label {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  fill: var(--muted);
+}
+
+.climb-num {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.climb-num-start {
+  font-size: 24px;
+  fill: var(--ink);
+}
+
+.climb-num-up {
+  font-size: 40px;
+  fill: var(--signal);
+}
+
+.climb-num-down {
+  font-size: 24px;
+  fill: var(--warning);
+}
+
+.climb-label-up {
+  fill: var(--signal);
+}
+
+.climb-label-down {
+  fill: var(--warning);
+}
+
+.climb-path {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.climb-up {
+  stroke: var(--signal);
+  stroke-width: 4;
+}
+
+.climb-down {
+  stroke: var(--warning);
+  stroke-width: 2.5;
+}
+
+.climb-dot-start {
+  fill: var(--ink);
+}
+
+.climb-dot-up {
+  fill: var(--signal);
+}
+
+.climb-dot-down {
+  fill: var(--warning);
+}
+
+.climb-actions {
+  margin-top: var(--space-2);
+}
+
+.climb-run {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 12px 22px;
+  border: 1px solid var(--signal);
+  background: var(--signal);
+  color: var(--bg);
+  cursor: pointer;
+}
+
+.climb-run:hover {
+  filter: brightness(1.1);
+}
+
+.climb-run[hidden] {
+  display: none;
+}
+
+.climb-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  line-height: 1.2;
+  margin: var(--space-3) 0 0;
+  color: var(--ink);
+}
+
+/* JS-enhanced: the start state, then the run */
+.climb--ready .climb-path {
+  stroke-dasharray: var(--len);
+  stroke-dashoffset: var(--len);
+}
+
+.climb--ready .climb-end,
+.climb--ready .climb-late,
+.climb--ready .climb-line {
+  opacity: 0;
+}
+
+.climb--ready.climb--ran .climb-path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.3, 0.7, 0.2, 1);
+}
+
+.climb--ready.climb--ran .climb-end {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.climb--ready.climb--ran .climb-late {
+  opacity: 1;
+  transition: opacity 0.5s ease 1.4s;
+}
+
+.climb--ready .climb-line.is-on {
+  opacity: 1;
+  transition: opacity 0.7s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .climb--ready.climb--ran .climb-path,
+  .climb--ready.climb--ran .climb-end,
+  .climb--ready.climb--ran .climb-late,
+  .climb--ready .climb-line.is-on {
+    transition: none;
+  }
+}

@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=18">
+  <link rel="stylesheet" href="css/style.css?v=19">
 </head>
 <body>
 
@@ -45,6 +45,43 @@
             improving past the point where any human can follow. It may be the most important thing our species ever
             builds. It should be built for all of humanity.
           </p>
+
+          <!-- The self-taught climb, press to run: experience_frontier_free_t4_v1 (seed 0) 15 -> 44 of 280; coin-flip 0 -->
+          <figure class="climb" data-climb>
+            <figcaption class="climb-head">
+              <span class="eyebrow">Where it starts</span>
+              <span class="climb-start">15 of 280 problems it had never seen</span>
+            </figcaption>
+            <svg class="climb-svg" viewBox="0 0 560 300" role="img"
+                 aria-label="Before: 15 of 280 unseen problems solved. After teaching itself from its own checked attempts: 44. The same training with a coin-flip reward: 0.">
+              <line class="climb-grid" x1="40" y1="30" x2="380" y2="30"/>
+              <line class="climb-grid" x1="40" y1="76.4" x2="380" y2="76.4"/>
+              <line class="climb-grid" x1="40" y1="122.8" x2="380" y2="122.8"/>
+              <line class="climb-grid" x1="40" y1="169.2" x2="380" y2="169.2"/>
+              <line class="climb-grid" x1="40" y1="215.6" x2="380" y2="215.6"/>
+              <line class="climb-axis" x1="40" y1="262" x2="380" y2="262"/>
+              <text class="climb-tick" x="60" y="290" text-anchor="middle">before</text>
+              <text class="climb-tick" x="360" y="290" text-anchor="middle">after</text>
+              <path class="climb-path climb-up" d="M60 192.4 L360 57.8"/>
+              <path class="climb-path climb-down" d="M60 192.4 L360 262"/>
+              <circle class="climb-dot-start" cx="60" cy="192.4" r="6"/>
+              <text class="climb-num climb-num-start" x="44" y="200" text-anchor="end">15</text>
+              <g class="climb-end">
+                <circle class="climb-dot-up" cx="360" cy="57.8" r="7"/>
+                <text class="climb-num climb-num-up" x="378" y="70" data-count-from="15" data-count-to="44">44</text>
+                <circle class="climb-dot-down" cx="360" cy="262" r="5"/>
+                <text class="climb-num climb-num-down" x="378" y="270" data-count-from="15" data-count-to="0">0</text>
+              </g>
+              <g class="climb-late">
+                <text class="climb-label climb-label-up" x="378" y="94">its own checked attempts</text>
+                <text class="climb-label climb-label-down" x="378" y="240">coin-flip reward</text>
+              </g>
+            </svg>
+            <div class="climb-actions">
+              <button type="button" class="climb-run" data-climb-run data-again="Again" hidden>Let it teach itself</button>
+            </div>
+            <p class="climb-line" data-climb-line>It taught itself.</p>
+          </figure>
 
           <h2>What we have achieved</h2>
 
@@ -124,5 +161,6 @@
   <script src="js/main.js"></script>
   <script src="js/orbit.js?v=15"></script>
   <script src="js/rocket.js?v=1"></script>
+  <script src="js/climb.js?v=1"></script>
 </body>
 </html>
